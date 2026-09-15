@@ -17,7 +17,7 @@ contents before treating this snapshot as current implementation evidence.
 | [.github](https://github.com/MarineCast/.github) | Organization profile and shared guidance | Documentation repository |
 | [toolkit-viewshed](https://github.com/MarineCast/toolkit-viewshed) | Static terrain, canopy, and distance viewability | Python package, CLI, configuration, tests, and methodology docs |
 | [toolkit-seascape](https://github.com/MarineCast/toolkit-seascape) | Bathymetry, geomorphology, and coastal geometry | Installable `seascape` package, acquisition/build CLI, configuration and offline tests; OrcaCast integration deferred |
-| [toolkit-oceanography](https://github.com/MarineCast/toolkit-oceanography) | Ocean properties, currents, tides, and waves | Initial repository; README only before agent guidance |
+| [toolkit-oceanography](https://github.com/MarineCast/toolkit-oceanography) | Ocean properties, currents, tides, and waves | Incomplete `oceanography` research package, CLI, offline tests and prioritized TODO; seascape inputs and further validation required |
 | [toolkit-meteorology](https://github.com/MarineCast/toolkit-meteorology) | HRRR weather, daylight, lunar and atmospheric H3 products | Installable `meteorology` package, CLI and offline tests; application integration deferred |
 | [toolkit-ais](https://github.com/MarineCast/toolkit-ais) | Vessel tracks and maritime activity | Initial repository; README only before agent guidance |
 | [toolkit-human](https://github.com/MarineCast/toolkit-human) | Population, access, recreation, and human activity | Initial checkout with no implementation files before agent guidance |
@@ -106,6 +106,9 @@ these quantities.
 - `toolkit-meteorology` now owns the extracted HRRR acquisition, offline weather and astronomy
   producers. Its README documents independent workspace initialization and per-family transactional
   publication. Future-weather forecasting, regional rebuilds and application integration are not verified.
+- `toolkit-oceanography` contains extracted research producers and offline tests. Its root `TODO.txt`
+  tracks incomplete research and production hardening; regional execution requires externally
+  provisioned seascape products. Package installation does not establish a complete ocean pipeline.
 - The remaining initial repositories have no verified executable entry points or test suites. Do not invent
   commands or describe successful execution before implementation exists.
 - Keep large source data, generated products, credentials, and private research inputs outside

@@ -2,185 +2,145 @@
 
 **Reusable data infrastructure for marine wildlife modeling and forecasting.**
 
-MarineCast is an open scientific software ecosystem for building reproducible spatial and temporal data products used in marine-species models.
+MarineCast is an open scientific software ecosystem for building reproducible spatial and temporal data products used in marine-species models. It brings together independent data toolkits and species-specific applications, with shared conventions for provenance, spatial support, temporal semantics, and validation.
 
-The project is a forecasting system for killer whale presence in the Pacific Northwest, but the underlying environmental and human-activity data pipelines are intentionally being developed as independent, reusable tools.
-
-The long-term goal is simple:
+The ecosystem is being extracted and generalized from OrcaCast, a killer whale modeling and forecasting project focused on the Pacific Northwest.
 
 > **Build the marine environment once. Use it across many species models.**
 
----
+## Organization structure
 
-## Ecosystem
+MarineCast separates reusable data processing from species-specific science:
 
-MarineCast separates general-purpose data engineering from species-specific modeling.
+- **Toolkits** acquire, normalize, process, and validate environmental and human-activity data independently of any species application.
+- **Applications** consume those products and own their ecological assumptions, features, models, calibration, evaluation, and forecasts.
+- **Shared conventions** connect the repositories through explicit data contracts and provenance. They are an ecosystem design goal, not a separate toolkit or application.
+
+### Data and spatial toolkits
+
+Toolkit repositories use the `toolkit-<domain>` naming convention. The scope below describes each toolkit's role; it does not imply that every listed capability is implemented.
+
+| Repository | Scope | Current status |
+| --- | --- | --- |
+| [toolkit-viewshed](https://github.com/MarineCast/toolkit-viewshed) | Terrain, canopy, distance, and static physical marine viewability | Implemented Python package with configuration, tests, and methodology documentation |
+| [toolkit-seascape](https://github.com/MarineCast/toolkit-seascape) | Bathymetry, marine geomorphology, coastal geometry, and derived seascape features | Python package, acquisition/build CLI and offline tests; application integration pending |
+| [toolkit-oceanography](https://github.com/MarineCast/toolkit-oceanography) | Ocean temperature, salinity, currents, tides, waves, and related products | Initial repository |
+| [toolkit-meteorology](https://github.com/MarineCast/toolkit-meteorology) | Historical and forecast meteorological data products | Initial repository |
+| [toolkit-ais](https://github.com/MarineCast/toolkit-ais) | Vessel tracks, vessel activity, traffic density, and maritime-use products | Initial repository |
+| [toolkit-human](https://github.com/MarineCast/toolkit-human) | Population, access, recreation, infrastructure, and human-presence indicators | Initial repository |
+| [toolkit-acoustic](https://github.com/MarineCast/toolkit-acoustic) | Acoustic observations and derived marine soundscape products | Initial repository |
+
+The [`.github` repository](https://github.com/MarineCast/.github) hosts this organization profile. See each toolkit's repository for its implementation, usage, and development status.
+
+### Species applications
+
+OrcaCast is the originating application for the MarineCast ecosystem. It combines whale observations with environmental and human-activity information to model and forecast killer whale activity. Reusable processing is being separated into the toolkits above while species-specific modeling remains with the application.
+
+The application layer is still being organized. Other species applications are future possibilities, not current MarineCast repositories listed here.
+
+## How the pieces fit together
 
 ```text
-                         MarineCast
-                            │
-          ┌─────────────────┼─────────────────┐
-          │                 │                 │
-     Data Toolkits      Shared Standards   Applications
-          │                 │                 │
-          ▼                 ▼                 ▼
-     Seascape          Data contracts       OrcaCast
-     Oceanography      Provenance            HumpbackCast
-     Meteorology       Spatial conventions   GreyWhaleCast
-     AIS               Temporal semantics    ...
-     Human activity
-     Viewshed
-```
-
-Data and spatial toolkits
-MarineCast data packages are designed to be usable independently of any particular species model.
-Repository	Purpose
-viewshed-toolkit	Terrain, canopy, distance, and physical marine viewability modeling
-seascape-toolkit	Bathymetry, marine geomorphology, coastal geometry, and derived seascape features
-oceanography-toolkit	Ocean temperature, salinity, currents, tides, waves, and related products
-meteorology-toolkit	Historical and forecast meteorological data products
-ais-toolkit	Vessel tracks, vessel activity, traffic density, and maritime-use products
-human-layer-toolkit	Population, access, recreation, infrastructure, and human-presence indicators
-Some of these repositories are planned and may not yet exist.
-Species applications
-Species-specific projects consume MarineCast data products while retaining their own ecological assumptions, features, models, calibration, and evaluation.
-OrcaCast
-OrcaCast is the first MarineCast application.
-It combines whale observations with environmental, oceanographic, seascape, prey, human-activity, acoustic, and observation-effort information to model and forecast killer whale activity.
-Future applications could reuse the same underlying infrastructure for other species without duplicating the data-processing stack.
-Examples might include:
-OrcaCast
-HumpbackCast
-GreyWhaleCast
-...
-Design principles
-Species-neutral upstream data
-Environmental measurements should describe the marine system rather than encode assumptions about a particular species.
-For example:
-bathymetry → MarineCast data layer
-distance to canyon → MarineCast data layer
-
-"canyons increase SRKW habitat suitability"
-    → OrcaCast modeling assumption
-That separation allows the same data product to support multiple scientific questions.
-Reproducible data products
-Generated datasets should carry enough information to answer:
-What source data were used?
-When were they retrieved?
-What code produced the output?
-What configuration was used?
-What geographic and temporal domain does it represent?
-What units and spatial support does each variable use?
-What validation checks were performed?
-Clear scientific boundaries
-MarineCast distinguishes measurements from interpretation.
-Examples:
-vessel traffic ≠ observer effort
-physical viewability ≠ detection probability
-hydrophone detection ≠ confirmed animal presence
-weather conditions ≠ sighting probability
-habitat characteristics ≠ species preference
-Those relationships belong in downstream models where they can be explicitly tested.
-Independent but interoperable
-Each toolkit should be able to:
-Acquire
-   ↓
-Normalize
-   ↓
-Process
-   ↓
-Validate
-   ↓
-Publish
-   ↓
-Consume
-without requiring OrcaCast or another species application to be installed.
-At the same time, packages should share common conventions for provenance, spatial support, temporal semantics, schemas, and validation.
-Architecture
-A typical MarineCast workflow looks like:
 External data sources
         │
         ▼
-┌───────────────────────────────┐
-│ MarineCast data toolkits      │
-│                               │
-│ seascape                      │
-│ meteorology                   │
-│ oceanography                  │
-│ AIS                           │
-│ human activity                │
-│ viewshed                      │
-└───────────────┬───────────────┘
-                │
-                ▼
-       Versioned data products
-                │
-        ┌───────┼────────┐
-        │       │        │
-        ▼       ▼        ▼
-    OrcaCast   Future   Research
-               models   analyses
+MarineCast toolkits
+  ├── toolkit-seascape
+  ├── toolkit-oceanography
+  ├── toolkit-meteorology
+  ├── toolkit-ais
+  ├── toolkit-human
+  ├── toolkit-acoustic
+  └── toolkit-viewshed
         │
         ▼
- Species-specific features
+Validated, versioned data products
         │
-        ▼
- Models + evaluation
+        ├── Research analyses
         │
-        ▼
- Forecast products
-Repository conventions
-MarineCast repositories should generally include:
+        └── Species applications, such as OrcaCast
+                    │
+                    ▼
+            Species-specific features
+                    │
+                    ▼
+            Models and evaluation
+                    │
+                    ▼
+              Forecast products
+```
+
+This is the intended integration pattern; toolkit interfaces and shared contracts are still evolving.
+
+## Design principles
+
+### Species-neutral upstream data
+
+Environmental measurements should describe the marine system rather than encode assumptions about a particular species. Bathymetry and distance to a canyon belong in a MarineCast data product. A claim that canyons increase habitat suitability belongs in a downstream species model, where it can be tested.
+
+### Reproducible data products
+
+Generated datasets should document:
+
+- Source data and retrieval dates.
+- Code version and configuration.
+- Geographic and temporal coverage.
+- Units, spatial support, and variable definitions.
+- Validation checks and known limitations.
+
+### Clear scientific boundaries
+
+MarineCast distinguishes measurements from interpretation:
+
+- Vessel traffic is not observer effort.
+- Physical viewability is not detection probability.
+- Hydrophone detections require validation and interpretation before supporting animal-presence claims.
+- Weather conditions are not sighting probability.
+- Habitat characteristics are not species preferences.
+
+Those relationships belong in downstream models where they can be explicitly tested.
+
+### Independent but interoperable
+
+Each toolkit should support its own acquisition, normalization, processing, validation, and publication workflow without requiring OrcaCast or another species application to be installed. Shared conventions should make the resulting products usable across applications without hiding their assumptions or limitations.
+
+## Repository conventions
+
+As toolkits develop, repositories should provide the documentation and interfaces appropriate to their scope, typically:
+
+```text
 README.md
 AGENTS.md
 pyproject.toml
-
 src/
 tests/
 configs/
 docs/
 examples/
-Where appropriate, repositories should also provide:
-a Python API
-a command-line interface
-documented configuration
-offline or synthetic test fixtures
-data schemas
-provenance metadata
-validation reports
-reproducible example workflows
+```
+
+Where appropriate, include a Python API, command-line interface, documented configuration, offline or synthetic test fixtures, data schemas, provenance metadata, validation reports, and reproducible examples.
+
 Large source and generated datasets should generally not be committed directly to Git.
-Project status
-MarineCast is under active development.
-The architecture is currently being extracted and generalized from the existing OrcaCast codebase. Interfaces, schemas, and repository boundaries may evolve while the shared ecosystem is established.
-Current priorities include:
-Establishing viewshed-toolkit as a reference reusable package.
-Separating reusable seascape processing from OrcaCast.
-Defining common dataset and provenance contracts.
-Modularizing meteorological, oceanographic, AIS, and human-activity pipelines.
-Keeping species-specific modeling logic within applications such as OrcaCast.
-Philosophy
-MarineCast is not intended to be one enormous marine-science package.
-Instead, it is a collection of focused tools that agree on enough conventions to work together.
-Small tools
-+
-explicit contracts
-+
-reproducible data
-+
-species-specific science
-=
-MarineCast
-Projects
-🐋 OrcaCast
-Killer whale presence modeling and forecasting.
-👁️ Viewshed Toolkit
-Reproducible terrain, canopy, distance, and marine-viewability modeling.
-🌊 Additional MarineCast toolkits
-Seascape, oceanography, meteorology, vessel activity, and human-use layers are being developed as the ecosystem evolves.
-Contributing
-MarineCast is currently evolving rapidly.
-Issues, ideas, scientific references, data-source recommendations, validation approaches, and code contributions are welcome as individual repositories are opened for broader collaboration.
-License
-Licensing is defined independently by each MarineCast repository.
-Source datasets may have separate licenses, attribution requirements, or redistribution restrictions from the software that processes them.
+
+## Project status
+
+MarineCast is under active development. Repository boundaries, interfaces, and schemas may evolve as reusable components are extracted from OrcaCast.
+
+Current priorities are:
+
+- Developing `toolkit-viewshed` as a reference reusable package.
+- Validating regional seascape rebuilds and integrating the extracted toolkit into applications.
+- Building out the oceanography, meteorology, AIS, human-activity, and acoustic toolkits.
+- Defining common dataset and provenance contracts.
+- Keeping species-specific modeling logic within applications.
+
+MarineCast is a collection of focused tools that share enough conventions to work together. Each repository may mature at a different pace.
+
+## Contributing
+
+Issues, scientific references, data-source recommendations, validation approaches, and code contributions are welcome. Start with the relevant toolkit's documentation and contribution guidance where available.
+
+## License
+
+Licensing is defined independently by each MarineCast repository. Source datasets may have separate licenses, attribution requirements, or redistribution restrictions from the software that processes them.

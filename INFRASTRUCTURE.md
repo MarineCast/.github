@@ -18,7 +18,7 @@ contents before treating this snapshot as current implementation evidence.
 | [toolkit-viewshed](https://github.com/MarineCast/toolkit-viewshed) | Static terrain, canopy, and distance viewability | Python package, CLI, configuration, tests, and methodology docs |
 | [toolkit-seascape](https://github.com/MarineCast/toolkit-seascape) | Bathymetry, geomorphology, and coastal geometry | Installable `seascape` package, acquisition/build CLI, configuration and offline tests; OrcaCast integration deferred |
 | [toolkit-oceanography](https://github.com/MarineCast/toolkit-oceanography) | Ocean properties, currents, tides, and waves | Initial repository; README only before agent guidance |
-| [toolkit-meteorology](https://github.com/MarineCast/toolkit-meteorology) | Historical and forecast weather products | Initial repository; README only before agent guidance |
+| [toolkit-meteorology](https://github.com/MarineCast/toolkit-meteorology) | HRRR weather, daylight, lunar and atmospheric H3 products | Installable `meteorology` package, CLI and offline tests; application integration deferred |
 | [toolkit-ais](https://github.com/MarineCast/toolkit-ais) | Vessel tracks and maritime activity | Initial repository; README only before agent guidance |
 | [toolkit-human](https://github.com/MarineCast/toolkit-human) | Population, access, recreation, and human activity | Initial checkout with no implementation files before agent guidance |
 | [toolkit-acoustic](https://github.com/MarineCast/toolkit-acoustic) | Acoustic observations and marine soundscape products | Initial repository; README only before agent guidance |
@@ -103,6 +103,9 @@ these quantities.
 - `toolkit-seascape` now owns the seascape producers extracted from OrcaCast. Its README documents
   installation, workspace configuration, acquisition and candidate-release commands. Regional
   rebuild and application integration remain separate validation steps.
+- `toolkit-meteorology` now owns the extracted HRRR acquisition, offline weather and astronomy
+  producers. Its README documents independent workspace initialization and per-family transactional
+  publication. Future-weather forecasting, regional rebuilds and application integration are not verified.
 - The remaining initial repositories have no verified executable entry points or test suites. Do not invent
   commands or describe successful execution before implementation exists.
 - Keep large source data, generated products, credentials, and private research inputs outside

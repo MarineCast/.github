@@ -25,7 +25,7 @@ Toolkit repositories use the `toolkit-<domain>` naming convention. The scope bel
 | [toolkit-viewshed](https://github.com/MarineCast/toolkit-viewshed) | Terrain, canopy, distance, and static physical marine viewability | Implemented Python package with configuration, tests, and methodology documentation |
 | [toolkit-seascape](https://github.com/MarineCast/toolkit-seascape) | Bathymetry, marine geomorphology, coastal geometry, and derived seascape features | Python package, acquisition/build CLI and offline tests; application integration pending |
 | [toolkit-oceanography](https://github.com/MarineCast/toolkit-oceanography) | Ocean temperature, salinity, currents, tides, waves, and related products | Initial repository |
-| [toolkit-meteorology](https://github.com/MarineCast/toolkit-meteorology) | Historical and forecast meteorological data products | Initial repository |
+| [toolkit-meteorology](https://github.com/MarineCast/toolkit-meteorology) | HRRR weather, daylight, lunar and atmospheric H3 products | Installable `meteorology` package, CLI and offline tests; application integration pending |
 | [toolkit-ais](https://github.com/MarineCast/toolkit-ais) | Vessel tracks, vessel activity, traffic density, and maritime-use products | Initial repository |
 | [toolkit-human](https://github.com/MarineCast/toolkit-human) | Population, access, recreation, infrastructure, and human-presence indicators | Initial repository |
 | [toolkit-acoustic](https://github.com/MarineCast/toolkit-acoustic) | Acoustic observations and derived marine soundscape products | Initial repository |
@@ -131,7 +131,8 @@ Current priorities are:
 
 - Developing `toolkit-viewshed` as a reference reusable package.
 - Validating regional seascape rebuilds and integrating the extracted toolkit into applications.
-- Building out the oceanography, meteorology, AIS, human-activity, and acoustic toolkits.
+- Validating regional meteorology rebuilds and integrating its extracted products into applications.
+- Building out the oceanography, AIS, human-activity, and acoustic toolkits.
 - Defining common dataset and provenance contracts.
 - Keeping species-specific modeling logic within applications.
 

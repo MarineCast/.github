@@ -1,0 +1,99 @@
+{
+  "contract_version": "0.1",
+  "product": {
+    "id": "seascape.example_bathymetry",
+    "version": "0.1.0",
+    "description": "Synthetic bathymetry contract example.",
+    "quantity_kind": "environmental_condition"
+  },
+  "producer": {
+    "repository": "toolkit-seascape",
+    "package": "toolkit-seascape",
+    "package_version": "0.0.0+example",
+    "git_sha": "0000000000000000000000000000000000000000",
+    "working_tree_dirty": false
+  },
+  "identity": {
+    "row_description": "One synthetic value per h3_index.",
+    "primary_key": [
+      "h3_index"
+    ]
+  },
+  "spatial": {
+    "type": "h3",
+    "resolution": 6,
+    "index_fields": [
+      "h3_index"
+    ],
+    "support": "cell",
+    "crs": "EPSG:4326",
+    "domain": "Synthetic fixture universe: exactly 8628d1067ffffff and 8628d105fffffff; no regional coverage claim.",
+    "method": "Illustrative values assigned to whole cells; no source interpolation or scientific calculation."
+  },
+  "temporal": {
+    "type": "static",
+    "meaning": "Illustrative fixed surface; no real survey epoch or applicability claim."
+  },
+  "fields": {
+    "h3_index": {
+      "type": "string",
+      "description": "Canonical H3 cell index at resolution 6.",
+      "units": null,
+      "nullable": false,
+      "statistic": "identity"
+    },
+    "depth_m": {
+      "type": "number",
+      "description": "Synthetic depth, positive downward relative to an illustrative mean-sea-level datum.",
+      "units": "m",
+      "nullable": true,
+      "statistic": "cell mean",
+      "missing_reason_field": "depth_status",
+      "minimum": 0
+    },
+    "depth_status": {
+      "type": "string",
+      "description": "Coverage and missingness state of the associated value.",
+      "units": null,
+      "nullable": false,
+      "statistic": "identity",
+      "enum": [
+        "observed",
+        "unknown",
+        "unavailable",
+        "not_applicable",
+        "partial"
+      ]
+    }
+  },
+  "provenance": {
+    "created_at": "2026-09-15T12:00:00Z",
+    "configuration": {
+      "description": "Exact UTF-8 bytes of synthetic-config.json beside this manifest; complete fixture configuration.",
+      "sha256": "0e3103280318752a553f2e39375fde81ef4c72541ee61ff010806b1c88d5e4ac"
+    },
+    "sources": [
+      {
+        "id": "marinecast.synthetic_fixture",
+        "source_version": "1",
+        "retrieved_at": "2026-09-15T12:00:00Z",
+        "spatial_coverage": "Two synthetic H3 R6 cells; no observations.",
+        "temporal_coverage": "Invented values for the intervals described in this manifest, or static examples.",
+        "license": "CC0-1.0",
+        "attribution": "MarineCast contract examples; synthetic data.",
+        "redistribution": "Synthetic fixture only; no external source data included."
+      }
+    ],
+    "processing": "Hand-authored synthetic fixture; not emitted by the named toolkit."
+  },
+  "limitations": [
+    "Illustrative proposal only; producer version and all-zero Git SHA are placeholders, not a real build.",
+    "Values are invented and must not be used for analysis."
+  ],
+  "artifact": {
+    "path": "seascape-static.csv",
+    "format": "csv",
+    "sha256": "ae01facb9895c805654a467b2f376d0c477c226d0d1016f40bff0c3e269b2642",
+    "row_count": 2
+  }
+}

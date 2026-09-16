@@ -1,0 +1,128 @@
+{
+  "contract_version": "0.1",
+  "product": {
+    "id": "meteorology.example_daily_temperature_utc",
+    "version": "0.1.0",
+    "description": "Synthetic daily temperature example, not the existing HRRR product.",
+    "quantity_kind": "environmental_condition"
+  },
+  "producer": {
+    "repository": "toolkit-meteorology",
+    "package": "toolkit-meteorology",
+    "package_version": "0.0.0+example",
+    "git_sha": "0000000000000000000000000000000000000000",
+    "working_tree_dirty": false
+  },
+  "identity": {
+    "row_description": "One synthetic value per h3_index, interval_start, interval_end.",
+    "primary_key": [
+      "h3_index",
+      "interval_start",
+      "interval_end"
+    ]
+  },
+  "spatial": {
+    "type": "h3",
+    "resolution": 6,
+    "index_fields": [
+      "h3_index"
+    ],
+    "support": "cell",
+    "crs": "EPSG:4326",
+    "domain": "Synthetic fixture universe: exactly 8628d1067ffffff and 8628d105fffffff; no regional coverage claim.",
+    "method": "Illustrative values assigned to whole cells; no source interpolation or scientific calculation."
+  },
+  "temporal": {
+    "type": "interval",
+    "start_field": "interval_start",
+    "end_field": "interval_end",
+    "timezone": "UTC",
+    "closed": "left",
+    "aggregation": "Illustrative hourly samples, equal weighting; a complete interval has one sample per elapsed hour. Partial estimates require at least half of the expected samples; otherwise null.",
+    "label_field": "date",
+    "label_definition": "Calendar date containing interval_start in UTC; boundaries are successive local midnights."
+  },
+  "fields": {
+    "h3_index": {
+      "type": "string",
+      "description": "Canonical H3 cell index at resolution 6.",
+      "units": null,
+      "nullable": false,
+      "statistic": "identity"
+    },
+    "interval_start": {
+      "type": "datetime",
+      "description": "Inclusive valid interval start.",
+      "units": null,
+      "nullable": false,
+      "statistic": "identity"
+    },
+    "interval_end": {
+      "type": "datetime",
+      "description": "Exclusive valid interval end.",
+      "units": null,
+      "nullable": false,
+      "statistic": "identity"
+    },
+    "date": {
+      "type": "date",
+      "description": "Calendar date in the declared zone.",
+      "units": null,
+      "nullable": false,
+      "statistic": "identity"
+    },
+    "temperature_c": {
+      "type": "number",
+      "description": "Synthetic air temperature; illustrative height 2 m above surface.",
+      "units": "degC",
+      "nullable": true,
+      "statistic": "arithmetic mean of available hourly samples",
+      "missing_reason_field": "temperature_status"
+    },
+    "temperature_status": {
+      "type": "string",
+      "description": "Coverage and missingness state of the associated value.",
+      "units": null,
+      "nullable": false,
+      "statistic": "identity",
+      "enum": [
+        "observed",
+        "unknown",
+        "unavailable",
+        "not_applicable",
+        "partial"
+      ]
+    }
+  },
+  "provenance": {
+    "created_at": "2026-09-15T12:00:00Z",
+    "configuration": {
+      "description": "Exact UTF-8 bytes of synthetic-config.json beside this manifest; complete fixture configuration.",
+      "sha256": "0e3103280318752a553f2e39375fde81ef4c72541ee61ff010806b1c88d5e4ac"
+    },
+    "sources": [
+      {
+        "id": "marinecast.synthetic_fixture",
+        "source_version": "1",
+        "retrieved_at": "2026-09-15T12:00:00Z",
+        "spatial_coverage": "Two synthetic H3 R6 cells; no observations.",
+        "temporal_coverage": "Invented values for the intervals described in this manifest, or static examples.",
+        "license": "CC0-1.0",
+        "attribution": "MarineCast contract examples; synthetic data.",
+        "redistribution": "Synthetic fixture only; no external source data included."
+      }
+    ],
+    "processing": "Hand-authored synthetic fixture; not emitted by the named toolkit."
+  },
+  "limitations": [
+    "Illustrative proposal only; producer version and all-zero Git SHA are placeholders, not a real build.",
+    "Values are invented and must not be used for analysis.",
+    "This hourly aggregation is illustrative; actual toolkit weather uses its own sampling and coverage contract."
+  ],
+  "artifact": {
+    "path": "meteorology-utc.csv",
+    "format": "csv",
+    "sha256": "1b3c90866f9a5f8ff815956617f99b715869bc5a192f8c627cae8c82b8fbc523",
+    "row_count": 2
+  }
+}

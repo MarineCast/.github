@@ -1,0 +1,121 @@
+{
+  "contract_version": "0.1",
+  "product": {
+    "id": "viewshed.example_physical_viewability",
+    "version": "0.1.0",
+    "description": "Synthetic directed pair contract example.",
+    "quantity_kind": "physical_viewability"
+  },
+  "producer": {
+    "repository": "toolkit-viewshed",
+    "package": "viewshed-toolkit",
+    "package_version": "0.0.0+example",
+    "git_sha": "0000000000000000000000000000000000000000",
+    "working_tree_dirty": false
+  },
+  "identity": {
+    "row_description": "One synthetic value per source_type, source_h3, target_h3.",
+    "primary_key": [
+      "source_type",
+      "source_h3",
+      "target_h3"
+    ]
+  },
+  "spatial": {
+    "type": "h3",
+    "resolution": 6,
+    "index_fields": [
+      "source_h3",
+      "target_h3"
+    ],
+    "support": "cell_pair",
+    "crs": "EPSG:4326",
+    "domain": "Exactly two illustrative directed role-pairs: land 8628d1067ffffff to 8628d105fffffff, and water 8628d105fffffff to 8628d1067ffffff. No other pairs are in the intended universe.",
+    "method": "Synthetic directed source-to-target pair weights; no terrain, canopy or distance calculation was run."
+  },
+  "temporal": {
+    "type": "static",
+    "meaning": "Illustrative fixed surface; no real survey epoch or applicability claim."
+  },
+  "fields": {
+    "source_type": {
+      "type": "string",
+      "description": "Illustrative observer source role.",
+      "units": null,
+      "nullable": false,
+      "statistic": "identity",
+      "enum": [
+        "land",
+        "water"
+      ]
+    },
+    "source_h3": {
+      "type": "string",
+      "description": "Canonical H3 cell index at resolution 6.",
+      "units": null,
+      "nullable": false,
+      "statistic": "identity"
+    },
+    "target_h3": {
+      "type": "string",
+      "description": "Canonical H3 cell index at resolution 6.",
+      "units": null,
+      "nullable": false,
+      "statistic": "identity"
+    },
+    "viewability_weight": {
+      "type": "number",
+      "description": "Synthetic static physical viewability weight; not observer presence, reporting or detection probability.",
+      "units": "1",
+      "nullable": true,
+      "statistic": "illustrative directed-pair weight",
+      "missing_reason_field": "viewability_status",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "viewability_status": {
+      "type": "string",
+      "description": "Coverage and missingness state of the associated value.",
+      "units": null,
+      "nullable": false,
+      "statistic": "identity",
+      "enum": [
+        "observed",
+        "unknown",
+        "unavailable",
+        "not_applicable",
+        "partial"
+      ]
+    }
+  },
+  "provenance": {
+    "created_at": "2026-09-15T12:00:00Z",
+    "configuration": {
+      "description": "Exact UTF-8 bytes of synthetic-config.json beside this manifest; complete fixture configuration.",
+      "sha256": "0e3103280318752a553f2e39375fde81ef4c72541ee61ff010806b1c88d5e4ac"
+    },
+    "sources": [
+      {
+        "id": "marinecast.synthetic_fixture",
+        "source_version": "1",
+        "retrieved_at": "2026-09-15T12:00:00Z",
+        "spatial_coverage": "Two synthetic H3 R6 cells; no observations.",
+        "temporal_coverage": "Invented values for the intervals described in this manifest, or static examples.",
+        "license": "CC0-1.0",
+        "attribution": "MarineCast contract examples; synthetic data.",
+        "redistribution": "Synthetic fixture only; no external source data included."
+      }
+    ],
+    "processing": "Hand-authored synthetic fixture; not emitted by the named toolkit."
+  },
+  "limitations": [
+    "Illustrative proposal only; producer version and all-zero Git SHA are placeholders, not a real build.",
+    "Values are invented and must not be used for analysis."
+  ],
+  "artifact": {
+    "path": "viewshed-pairs.csv",
+    "format": "csv",
+    "sha256": "78fc4335980325b75548b3b80c45ce0fdf09c1483eba56907e0dae3839abca5a",
+    "row_count": 2
+  }
+}

@@ -1,0 +1,3 @@
+h3_index,interval_start,interval_end,date,temperature_c,temperature_status
+8628d1067ffffff,2024-03-10T00:00:00-08:00,2024-03-11T00:00:00-07:00,2024-03-10,8,observed
+8628d105fffffff,2024-03-10T00:00:00-08:00,2024-03-11T00:00:00-07:00,2024-03-10,7,partial

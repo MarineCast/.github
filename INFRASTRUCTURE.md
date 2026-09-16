@@ -10,6 +10,9 @@ configuration, methodology, and API documentation remain authoritative for their
 status, deployment, and end-to-end application integration were not verified. Recheck repository
 contents before treating this snapshot as current implementation evidence.
 
+The governance entry and extraction boundaries were refreshed on 2026-09-16 against its local
+package, offline tests and installed wheel. This does not revalidate the other toolkit entries.
+
 ## Current organization
 
 | Repository | Responsibility | Observed implementation |
@@ -20,8 +23,9 @@ contents before treating this snapshot as current implementation evidence.
 | [toolkit-oceanography](https://github.com/MarineCast/toolkit-oceanography) | Ocean properties, currents, tides, and waves | Incomplete `oceanography` research package, CLI, offline tests and prioritized TODO; seascape inputs and further validation required |
 | [toolkit-meteorology](https://github.com/MarineCast/toolkit-meteorology) | HRRR weather, daylight, lunar and atmospheric H3 products | Installable `meteorology` package, CLI and offline tests; application integration deferred |
 | [toolkit-ais](https://github.com/MarineCast/toolkit-ais) | Vessel tracks and maritime activity | Initial repository; README only before agent guidance |
-| [toolkit-human](https://github.com/MarineCast/toolkit-human) | Population, access, recreation, and human activity | Initial checkout with no implementation files before agent guidance |
+| [toolkit-human](https://github.com/MarineCast/toolkit-human) | Population, access, recreation, and human activity | Installable `human` research package extracted from OrcaCast; CLI, offline tests and local Graphify navigation; regional/application integration unverified |
 | [toolkit-acoustic](https://github.com/MarineCast/toolkit-acoustic) | Acoustic observations and marine soundscape products | Initial repository; README only before agent guidance |
+| [toolkit-governance](https://github.com/MarineCast/toolkit-governance) | Native-geometry marine protected areas, jurisdictional references and fisheries management | Installable `governance` package, CLI, six implemented collections, offline tests and local Graphify graph; 18 catalog entries remain planned |
 
 OrcaCast is the originating species application. The local `Apps/` grouping is empty at this
 snapshot; this inventory does not establish an application repository or deployment in the
@@ -59,11 +63,21 @@ External sources → Domain toolkits → Validated data products
 - Shared conventions live here as design requirements until implemented by an owning repository.
   There is currently no shared-schema package or organization-wide execution service established
   by this inventory. Introduce common code only with a clear owner and compatibility plan.
+- `toolkit-governance` owns marine regulatory/reference geometry and its native product contracts.
+  It has no OrcaCast runtime dependency. International-boundary reconciliation requires explicitly
+  provisioned source/spatial-support inputs; source availability and regional rebuilds are separate
+  checks. This guide and the proposed `.github/contracts/` H3 specification remain owned here.
 
 ## Data integration requirements
 
 These are requirements for new integrations, not a claim that all repositories already implement
 one uniform schema, manifest format, spatial grid, or publication mechanism.
+
+The proposed [data-product contract v0.1](contracts/README.md) turns these requirements into a
+small manifest specification, JSON Schema and synthetic examples for H3 tables. It is not an
+implemented ecosystem standard. Trial it independently in two or three toolkits before extracting
+shared code; no `marinecast-core` package is introduced. Toolkit adoption and application
+integration require separate validation.
 
 | Contract | What producers and consumers must agree on |
 | --- | --- |
@@ -94,6 +108,10 @@ separate from validated species-presence inference; and environmental features s
 habitat preference. Downstream transformations must state and test the assumptions that connect
 these quantities.
 
+Governance reference geometry, controlling legal authority, effective dates and source vintage
+are also distinct. Native geometry has no implicit H3 resolution; governance fields remain
+model-ineligible by default. The proposed H3 contract v0.1 does not cover these native products.
+
 ## Execution, storage, and publishing boundaries
 
 - There is no common install command, test runner, or runtime environment for this workspace.
@@ -109,6 +127,14 @@ these quantities.
 - `toolkit-oceanography` contains extracted research producers and offline tests. Its root `TODO.txt`
   tracks incomplete research and production hardening; regional execution requires externally
   provisioned seascape products. Package installation does not establish a complete ocean pipeline.
+- `toolkit-human` owns extracted population, access, calendar, AIS/ferry and reporting-opportunity
+  producers. Its legacy observation geometry remains separate from `toolkit-viewshed`; equivalence
+  is not established. `toolkit-ais` remains a scaffold. See the human README for setup and limits.
+- `toolkit-governance` contains the extracted native-geometry producers, configuration, catalog and
+  tests. Its README and workflow docs describe explicit workspaces and per-file atomic outputs;
+  there is no whole-family transaction. Historical local products were preserved as migration
+  evidence, not recertified. Live acquisition, regional rebuilds and application integration were
+  not run during extraction. Its Graphify cache is local-only, like the other implemented toolkits.
 - The remaining initial repositories have no verified executable entry points or test suites. Do not invent
   commands or describe successful execution before implementation exists.
 - Keep large source data, generated products, credentials, and private research inputs outside

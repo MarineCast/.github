@@ -27,8 +27,9 @@ Toolkit repositories use the `toolkit-<domain>` naming convention. The scope bel
 | [toolkit-oceanography](https://github.com/MarineCast/toolkit-oceanography) | Ocean temperature, salinity, currents, tides, waves, and related products | Incomplete research package extracted from OrcaCast; see its TODO for implemented scope and remaining work |
 | [toolkit-meteorology](https://github.com/MarineCast/toolkit-meteorology) | HRRR weather, daylight, lunar and atmospheric H3 products | Installable `meteorology` package, CLI and offline tests; application integration pending |
 | [toolkit-ais](https://github.com/MarineCast/toolkit-ais) | Vessel tracks, vessel activity, traffic density, and maritime-use products | Initial repository |
-| [toolkit-human](https://github.com/MarineCast/toolkit-human) | Population, access, recreation, infrastructure, and human-presence indicators | Initial repository |
+| [toolkit-human](https://github.com/MarineCast/toolkit-human) | Population, access, activity, and reporting-opportunity products | Extracted Python research package with CLI and offline tests |
 | [toolkit-acoustic](https://github.com/MarineCast/toolkit-acoustic) | Acoustic observations and derived marine soundscape products | Initial repository |
+| [toolkit-governance](https://github.com/MarineCast/toolkit-governance) | Native-geometry marine protected areas, jurisdictional references and fisheries management | Installable `governance` package, CLI and offline tests; six implemented collections, broader catalog still planned |
 
 The [`.github` repository](https://github.com/MarineCast/.github) hosts this organization profile. See each toolkit's repository for its implementation, usage, and development status.
 
@@ -51,6 +52,7 @@ MarineCast toolkits
   ├── toolkit-ais
   ├── toolkit-human
   ├── toolkit-acoustic
+  ├── toolkit-governance
   └── toolkit-viewshed
         │
         ▼
@@ -97,6 +99,7 @@ MarineCast distinguishes measurements from interpretation:
 - Hydrophone detections require validation and interpretation before supporting animal-presence claims.
 - Weather conditions are not sighting probability.
 - Habitat characteristics are not species preferences.
+- Regulatory reference geometry is not controlling legal authority or evidence of compliance.
 
 Those relationships belong in downstream models where they can be explicitly tested.
 
@@ -132,7 +135,8 @@ Current priorities are:
 - Developing `toolkit-viewshed` as a reference reusable package.
 - Validating regional seascape rebuilds and integrating the extracted toolkit into applications.
 - Validating regional meteorology rebuilds and integrating its extracted products into applications.
-- Building out the oceanography, AIS, human-activity, and acoustic toolkits.
+- Validating the extracted oceanography and human-activity packages; building out AIS and acoustics.
+- Validating governance source coverage and regional rebuilds while preserving legal and temporal provenance.
 - Defining common dataset and provenance contracts.
 - Keeping species-specific modeling logic within applications.
 

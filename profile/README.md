@@ -1,4 +1,4 @@
-# MarineCast 🌊🐋
+# MarineCast
 
 **Reusable data infrastructure for marine wildlife modeling and forecasting.**
 

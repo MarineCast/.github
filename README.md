@@ -8,3 +8,12 @@ This repository hosts the MarineCast GitHub organization profile and shared arch
 
 Each toolkit maintains its own `AGENTS.md`. Instructions in this repository are not automatically
 inherited by other organization repositories.
+
+## Optional agent tooling and evaluation
+
+- [Code navigation](docs/code-navigation.md): selective Graphify, syntax and literal retrieval.
+- [Context audit](docs/context-audit.md): file-size findings and limitations.
+- [Serena pilot proposal](docs/serena-evaluation.md) and [future graph comparison](docs/code-graph-evaluation.md).
+- [Agent benchmarks](agent-evals/README.md): collect real task measurements.
+
+These are on-demand references, not required preloads for ordinary toolkit tasks.

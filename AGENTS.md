@@ -13,6 +13,9 @@ This `AGENTS.md` applies to this checkout; it does not automatically govern othe
   operational boundaries for work across repositories.
 - `README.md`: entry point explaining this documentation repository.
 - `AGENTS.md`: instructions for maintaining these documents.
+- `docs/code-navigation.md` and evaluation notes: optional shared developer-tool guidance.
+- `agent-evals/`: lightweight benchmark protocol; record only observed results, with unknowns
+  left empty. Never commit private transcripts, machine paths, or packed repository content.
 
 ## Editing contracts
 

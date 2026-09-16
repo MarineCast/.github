@@ -12,12 +12,15 @@ contents before treating this snapshot as current implementation evidence.
 
 The governance entry and extraction boundaries were refreshed on 2026-09-16 against its local
 package, offline tests and installed wheel. This does not revalidate the other toolkit entries.
+The marine-mammal ownership entry was also refreshed on 2026-09-16 against its local extraction;
+the toolkit migration document records validation scope separately from production readiness.
 
 ## Current organization
 
 | Repository | Responsibility | Observed implementation |
 | --- | --- | --- |
 | [.github](https://github.com/MarineCast/.github) | Organization profile and shared guidance | Documentation repository |
+| [toolkit-marine-mammals](https://github.com/MarineCast/toolkit-marine-mammals) | Observation acquisition, normalization, label imputation and population census processing | Installable `marine_mammal_toolkit`; killer-whale workflow, CLI and offline tests extracted from OrcaCast; other species are extension points |
 | [toolkit-viewshed](https://github.com/MarineCast/toolkit-viewshed) | Static terrain, canopy, and distance viewability | Python package, CLI, configuration, tests, and methodology docs |
 | [toolkit-seascape](https://github.com/MarineCast/toolkit-seascape) | Bathymetry, geomorphology, and coastal geometry | Installable `seascape` package, acquisition/build CLI, configuration and offline tests; OrcaCast integration deferred |
 | [toolkit-oceanography](https://github.com/MarineCast/toolkit-oceanography) | Ocean properties, currents, tides, and waves | Incomplete `oceanography` research package, CLI, offline tests and prioritized TODO; seascape inputs and further validation required |
@@ -27,14 +30,14 @@ package, offline tests and installed wheel. This does not revalidate the other t
 | [toolkit-acoustic](https://github.com/MarineCast/toolkit-acoustic) | Acoustic observations and marine soundscape products | Initial repository; README only before agent guidance |
 | [toolkit-governance](https://github.com/MarineCast/toolkit-governance) | Native-geometry marine protected areas, jurisdictional references and fisheries management | Installable `governance` package, CLI, six implemented collections, offline tests and local Graphify graph; 18 catalog entries remain planned |
 
-OrcaCast is the originating species application. The local `Apps/` grouping is empty at this
-snapshot; this inventory does not establish an application repository or deployment in the
-MarineCast organization. Additional species applications remain possibilities.
+OrcaCast is the originating species application, located locally at `Modeling/OrcaCast`.
+The `Apps/` grouping remains empty. This local checkout does not establish a public application
+repository or deployment in the MarineCast organization. Additional applications remain possibilities.
 
 ### Local workspace and independent clones
 
 The local workspace groups independent checkouts under `.github/`, `Toolkits/toolkit-*/`, and
-`Apps/`. These grouping directories are not an organization monorepo, an import hierarchy, or a
+`Modeling/OrcaCast` (and the empty `Apps/` grouping). These directories are not an organization monorepo, an import hierarchy, or a
 required installation layout. Each toolkit must remain usable from its own checkout.
 
 The parent workspace `AGENTS.md` guides local work across checkouts. Each repository's `AGENTS.md`
@@ -54,8 +57,13 @@ External sources → Domain toolkits → Validated data products
 
 - Toolkits own source acquisition, source-specific normalization, domain calculations, product
   validation, and provenance for their outputs.
-- Applications own observation interpretation, ecological assumptions, species-specific feature
-  engineering, model fitting, calibration, evaluation, and forecast presentation.
+- Marine-mammal source interpretation and observation-label imputation live in the toolkit's
+  species implementation. Killer-whale features and acceptance policy compose reusable engines.
+  Binary SRKW/Transient imputation preserves known-Other handling and abstention; it is not an
+  occurrence forecast or a general multiclass model.
+- Applications own ecological assumptions, occurrence/forecast feature engineering, forecast-model
+  fitting, calibration, evaluation, and presentation. Imputation research moved with its producer;
+  occurrence-model research remains in OrcaCast.
 - Applications may consume toolkit APIs or documented products. Toolkits must not require an
   application checkout, private application modules, or its research datasets to install or test.
 - Cross-toolkit dependencies must be explicit and justified in the consuming toolkit's documentation
@@ -116,6 +124,14 @@ model-ineligible by default. The proposed H3 contract v0.1 does not cover these 
 
 - There is no common install command, test runner, or runtime environment for this workspace.
   Follow each implemented toolkit's own setup and CI configuration.
+- `toolkit-marine-mammals` owns the six sightings sources, canonical state, imputation, counts,
+  model grids, intensity and census processing. OrcaCast uses its installed APIs. Canonical configs
+  ship in the wheel; data/model/output roots remain explicitly external. Existing data, manifests,
+  generated research outputs and model files were not relocated. Legacy Joblib models require a
+  refit and do not acquire certification through migration. Seascape supplies the public water
+  network API; its data base and named-area workspace must be explicitly configured. No live
+  acquisition, production refit, production-artifact rewrite or production promotion accompanied
+  the source migration. See the toolkit's migration document for observed checks and limits.
 - `toolkit-viewshed` currently requires Python 3.11+ and compatible GDAL/Rasterio for real geospatial
   execution. Its own `AGENTS.md` documents focused checks and workflow-specific effects.
 - `toolkit-seascape` now owns the seascape producers extracted from OrcaCast. Its README documents

@@ -13,7 +13,8 @@ The ecosystem is being extracted and generalized from OrcaCast, a killer whale m
 MarineCast separates reusable data processing from species-specific science:
 
 - **Toolkits** acquire, normalize, process, and validate environmental and human-activity data independently of any species application.
-- **Applications** consume those products and own their ecological assumptions, features, models, calibration, evaluation, and forecasts.
+- **Marine-mammal workflows** combine reusable observation/population tools with species-specific interpretation and label-imputation policies.
+- **Applications** consume those products and own occurrence-model assumptions, forecasting features, calibration, evaluation, and forecasts.
 - **Shared conventions** connect the repositories through explicit data contracts and provenance. They are an ecosystem design goal, not a separate toolkit or application.
 
 ### Data and spatial toolkits
@@ -22,6 +23,7 @@ Toolkit repositories use the `toolkit-<domain>` naming convention. The scope bel
 
 | Repository | Scope | Current status |
 | --- | --- | --- |
+| [toolkit-marine-mammals](https://github.com/MarineCast/toolkit-marine-mammals) | Marine-mammal observations, label imputation and population census processing | Installable toolkit with killer-whale workflow, CLI and offline tests; other species remain extension points |
 | [toolkit-viewshed](https://github.com/MarineCast/toolkit-viewshed) | Terrain, canopy, distance, and static physical marine viewability | Implemented Python package with configuration, tests, and methodology documentation |
 | [toolkit-seascape](https://github.com/MarineCast/toolkit-seascape) | Bathymetry, marine geomorphology, coastal geometry, and derived seascape features | Python package, acquisition/build CLI and offline tests; application integration pending |
 | [toolkit-oceanography](https://github.com/MarineCast/toolkit-oceanography) | Ocean temperature, salinity, currents, tides, waves, and related products | Incomplete research package extracted from OrcaCast; see its TODO for implemented scope and remaining work |
@@ -53,6 +55,7 @@ MarineCast toolkits
   ├── toolkit-human
   ├── toolkit-acoustic
   ├── toolkit-governance
+  ├── toolkit-marine-mammals
   └── toolkit-viewshed
         │
         ▼
@@ -138,7 +141,7 @@ Current priorities are:
 - Validating the extracted oceanography and human-activity packages; building out AIS and acoustics.
 - Validating governance source coverage and regional rebuilds while preserving legal and temporal provenance.
 - Defining common dataset and provenance contracts.
-- Keeping species-specific modeling logic within applications.
+- Keeping occurrence modeling and forecasting in applications, separate from toolkit observation-label imputation.
 
 MarineCast is a collection of focused tools that share enough conventions to work together. Each repository may mature at a different pace.
 

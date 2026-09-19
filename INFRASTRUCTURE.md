@@ -6,9 +6,10 @@ MarineCast separates species-neutral data processing from species-specific model
 This guide owns cross-repository architecture and coordination context. Toolkit architecture,
 configuration, methodology, and API documentation remain authoritative for their implementations.
 
-**Inventory verified against local checkouts and configured remotes on 2026-09-15.** Remote release
-status, deployment, and end-to-end application integration were not verified. Recheck repository
-contents before treating this snapshot as current implementation evidence.
+**Inventory verified against local checkouts and configured remotes on 2026-09-15; scaffold and
+planned repository availability was rechecked on 2026-09-19.** Remote release status, deployment,
+and end-to-end application integration were not verified. Recheck repository contents before
+treating this snapshot as current implementation evidence.
 
 The governance entry and extraction boundaries were refreshed on 2026-09-16 against its local
 package, offline tests and installed wheel. This does not revalidate the other toolkit entries.
@@ -27,7 +28,8 @@ the toolkit migration document records validation scope separately from producti
 | [toolkit-meteorology](https://github.com/MarineCast/toolkit-meteorology) | HRRR weather, daylight, lunar and atmospheric H3 products | Installable `meteorology` package, CLI and offline tests; application integration deferred |
 | [toolkit-ais](https://github.com/MarineCast/toolkit-ais) | Vessel tracks and maritime activity | Initial repository; README only before agent guidance |
 | [toolkit-human](https://github.com/MarineCast/toolkit-human) | Population, access, recreation, and human activity | Installable `human` research package extracted from OrcaCast; CLI, offline tests and local Graphify navigation; regional/application integration unverified |
-| [toolkit-acoustic](https://github.com/MarineCast/toolkit-acoustic) | Acoustic observations and marine soundscape products | Initial repository; README only before agent guidance |
+| `toolkit-acoustic` (planned) | Acoustic observations and marine soundscape products | Planned repository; no current local checkout or GitHub repository was found on 2026-09-19 |
+| [toolkit-salmon](https://github.com/MarineCast/toolkit-salmon) | Salmon data and future prey-context products | Initial README-only repository; no implemented package or pipeline |
 | [toolkit-governance](https://github.com/MarineCast/toolkit-governance) | Native-geometry marine protected areas, jurisdictional references and fisheries management | Installable `governance` package, CLI, six implemented collections, offline tests and local Graphify graph; 18 catalog entries remain planned |
 
 OrcaCast is the originating species application, located locally at `Modeling/OrcaCast`.
@@ -151,7 +153,8 @@ model-ineligible by default. The proposed H3 contract v0.1 does not cover these 
   there is no whole-family transaction. Historical local products were preserved as migration
   evidence, not recertified. Live acquisition, regional rebuilds and application integration were
   not run during extraction. Its Graphify cache is local-only, like the other implemented toolkits.
-- The remaining initial repositories have no verified executable entry points or test suites. Do not invent
+- The initial `toolkit-ais` and `toolkit-salmon` repositories have no verified executable entry
+  points or test suites. `toolkit-acoustic` is planned but does not currently exist. Do not invent
   commands or describe successful execution before implementation exists.
 - Keep large source data, generated products, credentials, and private research inputs outside
   tracked source. Document configured locations without embedding workstation-specific paths.

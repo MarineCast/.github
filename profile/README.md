@@ -30,7 +30,8 @@ Toolkit repositories use the `toolkit-<domain>` naming convention. The scope bel
 | [toolkit-meteorology](https://github.com/MarineCast/toolkit-meteorology) | HRRR weather, daylight, lunar and atmospheric H3 products | Installable `meteorology` package, CLI and offline tests; application integration pending |
 | [toolkit-ais](https://github.com/MarineCast/toolkit-ais) | Vessel tracks, vessel activity, traffic density, and maritime-use products | Initial repository |
 | [toolkit-human](https://github.com/MarineCast/toolkit-human) | Population, access, activity, and reporting-opportunity products | Extracted Python research package with CLI and offline tests |
-| [toolkit-acoustic](https://github.com/MarineCast/toolkit-acoustic) | Acoustic observations and derived marine soundscape products | Initial repository |
+| `toolkit-acoustic` (planned) | Acoustic observations and derived marine soundscape products | Planned; no current repository or implementation |
+| [toolkit-salmon](https://github.com/MarineCast/toolkit-salmon) | Salmon data and future prey-context products | Initial README-only repository |
 | [toolkit-governance](https://github.com/MarineCast/toolkit-governance) | Native-geometry marine protected areas, jurisdictional references and fisheries management | Installable `governance` package, CLI and offline tests; six implemented collections, broader catalog still planned |
 
 The [`.github` repository](https://github.com/MarineCast/.github) hosts this organization profile. See each toolkit's repository for its implementation, usage, and development status.
@@ -53,7 +54,8 @@ MarineCast toolkits
   ├── toolkit-meteorology
   ├── toolkit-ais
   ├── toolkit-human
-  ├── toolkit-acoustic
+  ├── toolkit-acoustic (planned)
+  ├── toolkit-salmon (scaffold)
   ├── toolkit-governance
   ├── toolkit-marine-mammals
   └── toolkit-viewshed

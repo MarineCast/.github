@@ -2,14 +2,15 @@
 
 **Approved by Tyler on 2026-10-04. This is the default target for application-facing toolkit products; toolkit conformance and application integration require separate evidence.**
 
-Tyler approved the delivery shape with “Yes that is exactly what I mean. Let's make that the default contract.” He then approved daily dynamic delivery: “Then for time resolution -> yes let's default to daily for every dynamic variables”. These decisions narrow the application-facing target while preserving the broader [manifest contract v0.1](README.md). They do not adopt the eleven [draft toolkit charters](../docs/production-readiness/README.md), authorize implementation or migration, or establish scientific readiness.
+Tyler approved the delivery shape with “Yes that is exactly what I mean. Let's make that the default contract.” He then approved daily dynamic delivery: “Then for time resolution -> yes let's default to daily for every dynamic variables”. Tyler also approved UTC calendar days with “yes utc makes sense to me.” These decisions narrow the application-facing target while preserving the broader [manifest contract v0.1](README.md). They do not adopt the eleven [draft toolkit charters](../docs/production-readiness/README.md), authorize implementation or migration, or establish scientific readiness.
 
 ## Approved defaults
 
 | Aspect | Default target convention |
 | --- | --- |
 | Physical format | Wide Parquet: qualified metrics are columns, alongside identity, support and quality fields needed to interpret them. |
-| Dynamic grain and cadence | Daily application-facing output for every dynamic variable: one row per H3 cell and declared daily valid interval for a specified product variant. Each metric has a documented, scientifically valid daily aggregation or representation. |
+| Dynamic grain and cadence | Daily application-facing output for every dynamic variable: one row per H3 cell and declared UTC daily valid interval for a specified product variant. Each metric has a documented, scientifically valid daily aggregation or representation. |
+| Daily calendar and label | UTC midnight inclusive to the next UTC midnight exclusive, using timezone-aware UTC boundary timestamps. The daily date label is the UTC interval-start date; it does not replace the boundaries. |
 | Static grain | One row per H3 cell for a specified product variant, with metric columns and a declared reference period/applicability. Do not fabricate a row-level date. |
 | Resolution | One H3 resolution per published table. Viewshed and related Human/viewability variables retain R7 under the approved exception below. Broader numerical policy and assignments remain pending; the exploratory direction is not approval of fixed R6 or R5/R4 assignments. |
 | Companion manifest | Describe units, methods, source data, quality rules and versions, together with v0.1 identity, spatial/temporal support, missingness, provenance, rights, configuration, exact artifact checksums and limitations. |
@@ -25,13 +26,17 @@ Daily is the approved application cadence, not a claim that every source observe
 
 For subdaily sources, specify an appropriate daily reduction rather than dropping samples or assuming an arithmetic mean fits every quantity. Slower sources require a declared interval-applicability or carry-forward rule only where scientifically justified; otherwise affected days remain unavailable with explicit reasons. Retain the original observation interval, vintage and availability, label carried values by their actual interpretation, and avoid future-data leakage. Do not invent daily observations, divide monthly totals arbitrarily, silently forward-fill, or imply daily measurement support that the source lacks.
 
-The calendar timezone and UTC-versus-local day boundaries remain unchosen. Once selected for a product, declare exact interval start/end boundaries and the calendar/zone; local days can be 23 or 25 hours. Daily delivery does not approve a timezone, aggregation method or global completeness threshold. Metrics in one row must have compatible declared daily support; incompatible support requires separate products or a reviewed transformation. Slower native applicability remains documented even when a justified daily representation is provided.
+UTC calendar days are approved: each daily interval is **[00:00 UTC, next 00:00 UTC)**. Declare `temporal.timezone` as `UTC` and represent boundary timestamps as timezone-aware UTC values, using RFC 3339 `Z`/`+00:00` strings or equivalent aware Parquet timestamps. The daily date label is the UTC date of the inclusive interval start, with its field and definition declared in the manifest. For example, label `2026-10-04` denotes `[2026-10-04T00:00:00Z, 2026-10-05T00:00:00Z)`. A label cannot replace actual interval boundaries or make unlike temporal support compatible.
+
+Explicitly labeled local-day exceptions require a reviewed aggregation/profile and declared calendar zone, boundaries and label meaning. Local days can be 23 or 25 hours; do not silently relabel them as UTC days or merely change their date labels. Mapping native local-day support to the UTC target requires a justified transformation; preserve the original support and report unavailable output where the evidence cannot support the conversion. Existing v0.1 local-day/native products remain valid under their contracts but do not automatically conform to the UTC default.
+
+The UTC decision does not approve an aggregation method or global completeness threshold. Metrics in one row must have compatible declared daily support; incompatible support requires separate products or a reviewed transformation. Slower native applicability remains documented even when a justified daily representation is provided.
 
 ## Relationship to manifest contract v0.1
 
 This is a delivery profile and decision record, not a new manifest schema version. The v0.1 JSON Schema and synthetic examples are unchanged. Valid CSV, instantaneous, directed-pair and other native/legacy products within v0.1's scope remain valid under that contract; they do not automatically meet this narrower wide-Parquet static/daily-interval target. Existing native contracts remain authoritative until an owning toolkit deliberately implements and validates a mapping.
 
-For a conforming cell product, map its complete unique, non-null key to `identity.primary_key`, its single index field/chosen resolution to `spatial`, all columns to `fields`, and its finished Parquet artifact to `artifact`. Dynamic keys include both interval boundaries as v0.1 requires; use its half-open **[start, end)** semantics and explicit zone. Static products use its applicability meaning. A date label is optional convenience and cannot replace boundaries. These existing rules do not select the still-pending day calendar or aggregation method.
+For a conforming cell product, map its complete unique, non-null key to `identity.primary_key`, its single index field/chosen resolution to `spatial`, all columns to `fields`, and its finished Parquet artifact to `artifact`. Dynamic keys include both interval boundaries as v0.1 requires; the approved daily profile uses half-open **[start, end)** UTC calendar intervals and the UTC interval-start date label. Static products use v0.1's applicability meaning. Labels cannot replace boundaries. UTC calendar approval leaves the scientific aggregation method pending; v0.1's broader timezone and optional-label scopes remain unchanged.
 
 Retain v0.1's strict validation: reject unknown core properties, duplicate JSON keys, non-standard numbers, incomplete keys, incompatible support, invalid value/status combinations and artifact hash mismatches. Schema validity alone does not verify artifacts, scientific meaning, rights or consumer compatibility. Follow the [validation and consumer acceptance checks](README.md#validation-and-consumer-acceptance); this approval neither relaxes them nor invents toolkit adoption.
 
@@ -60,9 +65,9 @@ Each published table still declares one resolution. Cross-resolution use require
 
 ## Decisions still pending
 
-Approval selects the delivery shape, daily dynamic cadence and scoped R7 exception. Product review must still decide:
+Approval selects the delivery shape, daily dynamic cadence, UTC calendar boundaries/labels and scoped R7 exception. Product review must still decide:
 
-- Calendar timezone and UTC-versus-local day boundaries; interval aggregation/representation, weighting, completeness and partial-period rules.
+- Interval aggregation/representation, weighting, completeness and partial-period rules; any explicitly labeled local-day exception requires a reviewed aggregation/profile. The default UTC calendar and boundaries are approved.
 - Broader numerical H3 resolution policy and product assignments beyond the approved R7 exception, geographic domain and spatial support/assignment or conversion methods. No fixed R6 or R5/R4 assignments are approved.
 - Global metric naming or a common registry; individual metrics still need unambiguous qualified definitions.
 - QC implementation or code changes; existing v0.1 missing-reason semantics remain in force.

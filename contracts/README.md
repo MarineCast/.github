@@ -2,11 +2,13 @@
 
 **Status: proposed; no toolkit adoption or OrcaCast integration is established by this spec.**
 Tyler approved the [application delivery defaults](application-delivery-profile.md) on 2026-10-04:
-wide Parquet, daily cell/valid-interval rows for dynamic variants or cell rows for static variants,
+wide Parquet, daily UTC cell/valid-interval rows for dynamic variants or cell rows for static variants,
 one resolution per table, and a companion manifest. That approved target profile does not change
 this v0.1 schema, invalidate its broader native/legacy formats or establish toolkit conformance.
 Viewshed and related Human/viewability variables retain R7 under a scoped approved exception;
-the broader numerical resolution policy remains exploratory.
+the broader numerical resolution policy remains exploratory. Daily UTC intervals run midnight
+inclusive to next midnight exclusive, with aware UTC timestamps and interval-start date labels.
+Reviewed local-day exceptions must be explicit; native v0.1 timezone options remain unchanged.
 
 This is a small interchange contract for species-neutral tabular products. It supplements the
 [infrastructure requirements](../INFRASTRUCTURE.md#data-integration-requirements); each toolkit

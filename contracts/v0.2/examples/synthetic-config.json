@@ -1,0 +1,58 @@
+{
+  "fixture": true,
+  "scientific_method_version": "synthetic-cell-boundaries-1",
+  "data_release_id": "synthetic-governance-reference-2026-10-04-1",
+  "cells": [
+    {
+      "h3_index": "8628d1047ffffff",
+      "case": "valid",
+      "expected_sources": [
+        "fixture.alpha"
+      ],
+      "available_sources": [
+        "fixture.alpha"
+      ]
+    },
+    {
+      "h3_index": "8628d1067ffffff",
+      "case": "valid_zero",
+      "expected_sources": [
+        "fixture.alpha"
+      ],
+      "available_sources": [
+        "fixture.alpha"
+      ]
+    },
+    {
+      "h3_index": "8628d106fffffff",
+      "case": "partial",
+      "expected_sources": [
+        "fixture.alpha",
+        "fixture.beta"
+      ],
+      "available_sources": [
+        "fixture.alpha"
+      ]
+    },
+    {
+      "h3_index": "8628d1077ffffff",
+      "case": "unavailable",
+      "expected_sources": [
+        "fixture.alpha"
+      ],
+      "available_sources": []
+    },
+    {
+      "h3_index": "8628d114fffffff",
+      "case": "unknown",
+      "expected_sources": null,
+      "available_sources": null
+    },
+    {
+      "h3_index": "8628d115fffffff",
+      "case": "not_applicable",
+      "expected_sources": [],
+      "available_sources": []
+    }
+  ]
+}

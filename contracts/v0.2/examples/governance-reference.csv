@@ -1,0 +1,7 @@
+h3_index,reference_feature_count,reference_feature_status,source_inventory_coverage_fraction,source_inventory_coverage_status
+8628d1047ffffff,1,observed,1,observed
+8628d1067ffffff,0,observed,1,observed
+8628d106fffffff,1,partial,0.5,observed
+8628d1077ffffff,,unavailable,0,observed
+8628d114fffffff,,unknown,,unknown
+8628d115fffffff,,not_applicable,,not_applicable

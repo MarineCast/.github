@@ -1,0 +1,127 @@
+{
+  "contract_version": "0.2",
+  "product": {
+    "id": "governance.example_reference_inventory",
+    "version": "0.1.0",
+    "description": "Synthetic source-backed reference geometry inventory projected to H3; not legal authority, regulatory applicability or compliance.",
+    "quantity_kind": "reference_geometry"
+  },
+  "producer": {
+    "repository": "toolkit-governance",
+    "package": "governance",
+    "package_version": "0.0.0+example",
+    "git_sha": "0000000000000000000000000000000000000000",
+    "working_tree_dirty": false
+  },
+  "identity": {
+    "row_description": "One synthetic inventory summary per H3 cell for the declared reference snapshot and source roster.",
+    "primary_key": [
+      "h3_index"
+    ]
+  },
+  "spatial": {
+    "type": "h3",
+    "resolution": 6,
+    "index_fields": [
+      "h3_index"
+    ],
+    "support": "cell",
+    "crs": "EPSG:4326",
+    "domain": "Synthetic fixture universe: exactly 8628d1047ffffff, 8628d1067ffffff, 8628d106fffffff, 8628d1077ffffff, 8628d114fffffff, 8628d115fffffff. R6 is illustrative, not an approved ecosystem resolution assignment.",
+    "method": "Invented native polygons exactly match two declared H3 boundaries. Count distinct fixture feature IDs within each cell and available source roster; preserve source IDs/native geometry. No real overlay accuracy or legal interpretation is established."
+  },
+  "temporal": {
+    "type": "static",
+    "meaning": "Synthetic reference inventory snapshot dated 2026-10-04. Effective/knowledge-time legal reconstruction is not provided; source effective_from/effective_to are unknown, and creation/retrieval are not legal validity."
+  },
+  "fields": {
+    "h3_index": {
+      "type": "string",
+      "description": "Canonical H3 cell index at resolution 6.",
+      "units": null,
+      "nullable": false,
+      "statistic": "identity"
+    },
+    "reference_feature_count": {
+      "type": "integer",
+      "description": "Distinct synthetic native reference feature IDs from the available sources in the declared cell. Zero applies only to the complete bounded fixture roster, not absence of regulation.",
+      "units": "1",
+      "nullable": true,
+      "statistic": "distinct feature count",
+      "missing_reason_field": "reference_feature_status",
+      "minimum": 0
+    },
+    "reference_feature_status": {
+      "type": "string",
+      "description": "Per-metric state: observed means a valid derived count, not a raw observation or proof of legal authority.",
+      "units": null,
+      "nullable": false,
+      "statistic": "identity",
+      "enum": [
+        "observed",
+        "unknown",
+        "unavailable",
+        "not_applicable",
+        "partial"
+      ]
+    },
+    "source_inventory_coverage_fraction": {
+      "type": "number",
+      "description": "Available fixture source count divided by expected fixture source count for the cell, with equal source weights. Roster coverage is not geographic completeness or legal applicability. Undefined/unknown expected support remains null.",
+      "units": "1",
+      "nullable": true,
+      "statistic": "ratio of available to expected sources",
+      "missing_reason_field": "source_inventory_coverage_status",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "source_inventory_coverage_status": {
+      "type": "string",
+      "description": "Status of the coverage fraction, independent of the count status; known incomplete coverage can be observed while the count is partial.",
+      "units": null,
+      "nullable": false,
+      "statistic": "identity",
+      "enum": [
+        "observed",
+        "unknown",
+        "unavailable",
+        "not_applicable",
+        "partial"
+      ]
+    }
+  },
+  "provenance": {
+    "created_at": "2026-10-04T12:00:00Z",
+    "configuration": {
+      "description": "Exact UTF-8 bytes of synthetic-config.json beside this manifest. Contains each cell source roster, scientific method version and immutable synthetic generated-data release identity.",
+      "sha256": "4680ee5b0b7dc9f61ca7607ea7be83e39751c6080f4ed050f0bf053a9e3e5088"
+    },
+    "sources": [
+      {
+        "id": "marinecast.synthetic_reference_geometry",
+        "source_version": "synthetic-boundaries.geojson@sha256=f701ee10f1fa42c51081173a8670d70c722eff4684fa487c2b4be26b4e4b47a4",
+        "retrieved_at": "2026-10-04T12:00:00Z",
+        "spatial_coverage": "Two invented cell-boundary polygons retained in synthetic-boundaries.geojson; no real territory or source completeness claim.",
+        "temporal_coverage": "Fixture snapshot only; effective-time legal validity and historical availability are unknown.",
+        "license": "CC0-1.0",
+        "attribution": "MarineCast synthetic contract fixtures; invented reference geometry.",
+        "redistribution": "Synthetic fixtures only are redistributable. No real governance source or third-party data rights are represented."
+      }
+    ],
+    "processing": "Hand-authored inventory fixture, not emitted by toolkit-governance. Method synthetic-cell-boundaries-1; immutable data release synthetic-governance-reference-2026-10-04-1. Expected source rosters and geometry are retained beside the manifest. Counts retain partial/null/true-zero distinctions; coverage weights every expected source equally. No controlling legal authority, regulatory applicability or compliance inference."
+  },
+  "artifact": {
+    "path": "governance-reference.csv",
+    "format": "csv",
+    "sha256": "ab7e41122090fd97d33fdd86b72673012d1e78602ce1379d89a68138999f62f4",
+    "row_count": 6
+  },
+  "limitations": [
+    "Synthetic source-backed example, not real Governance output or adoption; package version and all-zero Git SHA are fictitious.",
+    "CSV illustrates the broader manifest scope; it is not the approved wide-Parquet application delivery format.",
+    "No authoritative boundary, regulation, legal applicability, compliance or effective-time reconstruction is asserted.",
+    "Source roster coverage does not establish complete geographic coverage. Partial estimates cover only available sources; no universal percentage threshold is approved.",
+    "Native GeoJSON is source evidence governed separately, not a native-geometry artifact encoding added to this H3 manifest.",
+    "Illustrative R6 cells do not approve fixed resolutions for Governance or the ecosystem."
+  ]
+}

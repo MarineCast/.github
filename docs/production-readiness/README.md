@@ -24,6 +24,12 @@ Tyler also approved the [R7 exception](../../contracts/application-delivery-prof
 
 The [resolution direction](../../contracts/application-delivery-profile.md#exploratory-resolution-direction) is explicitly exploratory: R6 as a usual starting point, with scientifically justified per-product R5/R4 possibilities that balance native detail, retained gradients and cell/row/memory/storage costs. Weather and oceanography are candidates for review, not assigned resolutions. Broader policy and R6/R5/R4 assignments remain pending; consumer mapping must be explicit without forced R6 replication.
 
+## Reference geometry contract extension
+
+Tyler approved adding [`reference_geometry` in manifest v0.2](../../contracts/v0.2/README.md) for source-backed geometry inventories/reference overlays and explicit H3 projections. The separately versioned schema preserves v0.1 and adds no other quantity kinds or arbitrary native/raster/forecast/multi-artifact scope. These products do not assert controlling legal authority, regulatory applicability or compliance.
+
+The [synthetic Governance fixtures](../../contracts/v0.2/examples/README.md) and validator exercise both versions, provenance/rights limitations and value/status consistency; they are not real-source validation or Governance adoption. Native data releases can retain native manifests until an adopter verifies v0.2. Approved delivery defaults and the original dated assessment/eleven roadmaps remain intact.
+
 ## Toolkit status and proposed next milestones
 
 The assessment credits seven substantive implementations and identifies four scaffolds. Readiness is product- and domain-specific; existing exporters and passing CI do not establish scientific certification. Each roadmap retains its native-product boundaries, unresolved decisions and full acceptance tests.

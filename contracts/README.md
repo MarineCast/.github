@@ -26,6 +26,8 @@ missingness and provenance before joining products.
 
 ## Scope and files
 
+- [v0.2 reference geometry extension](v0.2/README.md): Tyler-approved `reference_geometry`
+  category in a separately versioned schema; v0.1 compatibility and native contracts are preserved.
 - [application-delivery-profile.md](application-delivery-profile.md): approved application-facing
   target defaults, distinct version/release identities, pending decisions and conformance evidence.
 - [product-manifest.schema.json](product-manifest.schema.json): JSON Schema Draft 2020-12 for
@@ -195,6 +197,14 @@ negative fixtures for duplicate keys, wrong resolution, UTC/local-day mismatch, 
 conversion, status disagreement and checksum mismatch.
 
 ## Versioning and adoption
+
+The approved [v0.2 extension](v0.2/README.md) adds only `reference_geometry` for source-backed
+geometry inventories/reference overlays, without asserting legal authority, regulatory applicability
+or compliance. It has a separate [schema](v0.2/product-manifest.schema.json) with an exact `0.2`
+version. This v0.1 schema, enum and examples remain unchanged; consumers explicitly choose a
+supported version. Native Governance manifests remain authoritative until an adopter verifies
+the chosen H3 contract. Run `python contracts/validate_examples.py` with the pinned
+[validation dependencies](validation-requirements.txt) to check both versions and their fixtures.
 
 Consumers explicitly allow supported contract versions; `0.1` is not an implicit compatibility
 promise for later drafts. Product versions use `major.minor.patch`: changes to grain, units,

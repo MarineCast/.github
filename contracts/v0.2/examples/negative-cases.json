@@ -1,0 +1,92 @@
+{
+  "base_manifest": "governance-reference.manifest.json",
+  "cases": [
+    {
+      "name": "unknown-quantity-kind",
+      "phase": "schema",
+      "manifest_updates": {
+        "/product/quantity_kind": "legal_compliance"
+      }
+    },
+    {
+      "name": "unsupported-version",
+      "phase": "schema",
+      "manifest_updates": {
+        "/contract_version": "9.9"
+      }
+    },
+    {
+      "name": "v0.1-reference-kind-rejected",
+      "schema_version": "0.1",
+      "phase": "schema",
+      "manifest_updates": {
+        "/contract_version": "0.1"
+      }
+    },
+    {
+      "name": "v0.2-v0.1-version-mismatch",
+      "phase": "schema",
+      "manifest_updates": {
+        "/contract_version": "0.1"
+      }
+    },
+    {
+      "name": "invalid-status-code",
+      "phase": "artifact",
+      "row_updates": [
+        {
+          "row": 0,
+          "field": "reference_feature_status",
+          "value": "valid"
+        }
+      ]
+    },
+    {
+      "name": "observed-null",
+      "phase": "artifact",
+      "row_updates": [
+        {
+          "row": 0,
+          "field": "reference_feature_count",
+          "value": null
+        }
+      ]
+    },
+    {
+      "name": "unavailable-non-null",
+      "phase": "artifact",
+      "row_updates": [
+        {
+          "row": 3,
+          "field": "reference_feature_count",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "name": "shared-status-wrong-for-coverage",
+      "phase": "artifact",
+      "manifest_updates": {
+        "/fields/source_inventory_coverage_fraction/missing_reason_field": "reference_feature_status"
+      }
+    },
+    {
+      "name": "artifact-checksum-mismatch",
+      "phase": "artifact",
+      "manifest_updates": {
+        "/artifact/sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      }
+    },
+    {
+      "name": "duplicate-cell-key",
+      "phase": "artifact",
+      "row_updates": [
+        {
+          "row": 1,
+          "field": "h3_index",
+          "value": "8628d1047ffffff"
+        }
+      ]
+    }
+  ]
+}

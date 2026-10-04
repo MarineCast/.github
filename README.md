@@ -5,6 +5,7 @@ This repository hosts the MarineCast GitHub organization profile and shared arch
 - [Organization profile](profile/README.md): ecosystem overview and toolkit directory.
 - [Infrastructure](INFRASTRUCTURE.md): repository ownership, data contracts, integration, and operational boundaries.
 - [Data-product contract v0.1](contracts/README.md): proposed manifest specification, schema and synthetic examples; adoption is not yet established.
+- [Reference geometry contract v0.2](contracts/v0.2/README.md): approved quantity-category extension with a separate schema and synthetic Governance validation fixtures; adoption remains separately evidenced.
 - [Approved application delivery defaults](contracts/application-delivery-profile.md): wide Parquet, daily UTC dynamic or static cell products, single-resolution tables and manifest requirements; toolkit conformance remains separately evidenced.
 - [Production readiness tracking](docs/production-readiness/README.md): assessment snapshot and eleven proposed toolkit roadmaps dated 2026-10-04; tracking approval does not adopt the charters or authorize implementation.
 - [Toolkit README banners](docs/readme-banners.md): shared 3:1 image sizing and full-width markup.

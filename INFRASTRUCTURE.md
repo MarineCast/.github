@@ -143,6 +143,12 @@ Governance reference geometry, controlling legal authority, effective dates and 
 are also distinct. Native geometry has no implicit H3 resolution; governance fields remain
 model-ineligible by default. The proposed H3 contract v0.1 does not cover these native products.
 
+The approved [manifest v0.2 extension](contracts/v0.2/README.md) adds `reference_geometry` for
+source-backed geometry inventories/reference overlays and their explicitly defined H3 projections.
+It does not encode arbitrary native geometry or assert controlling legal authority, regulatory
+applicability or compliance. Schema v0.1 is preserved. Native manifests remain authoritative until
+an adopter implements and validates v0.2; no toolkit or existing data release is migrated here.
+
 ## Execution, storage, and publishing boundaries
 
 - There is no common install command, test runner, or runtime environment for this workspace.

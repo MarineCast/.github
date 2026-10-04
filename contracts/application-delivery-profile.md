@@ -66,6 +66,11 @@ This approval does not implement statuses/coverage, certify a producer, or appro
 
 ## Relationship to manifest contract v0.1
 
+The separately [approved v0.2 reference geometry extension](v0.2/README.md) adds that quantity
+category in a new schema. These delivery defaults also apply when a product explicitly adopts
+v0.2; its native manifest and adoption evidence remain separate. v0.2 retains v0.1's statuses,
+format/spatial/time scope and version-identity fields, without changing the approved defaults.
+
 This is a delivery profile and decision record, not a new manifest schema version. The v0.1 JSON Schema and synthetic examples are unchanged. Valid CSV, instantaneous, directed-pair and other native/legacy products within v0.1's scope remain valid under that contract; they do not automatically meet this narrower wide-Parquet static/daily-interval target. Existing native contracts remain authoritative until an owning toolkit deliberately implements and validates a mapping.
 
 For a conforming cell product, map its complete unique, non-null key to `identity.primary_key`, its single index field/chosen resolution to `spatial`, all columns to `fields`, and its finished Parquet artifact to `artifact`. Dynamic keys include both interval boundaries as v0.1 requires; the approved daily profile uses half-open **[start, end)** UTC calendar intervals and the UTC interval-start date label. Static products use v0.1's applicability meaning. Labels cannot replace boundaries. UTC calendar approval leaves the scientific aggregation method pending; v0.1's broader timezone and optional-label scopes remain unchanged.

@@ -15,6 +15,7 @@ This `AGENTS.md` applies to this checkout; it does not automatically govern othe
 - `contracts/`: proposed manifest specifications, schemas and synthetic examples, plus the
   approved application delivery defaults; distinguish a target decision or validated example
   from toolkit adoption or application integration.
+  Preserve schema v0.1; the approved `reference_geometry` extension lives in `contracts/v0.2/`.
 - `AGENTS.md`: instructions for maintaining these documents.
 - `docs/code-navigation.md` and evaluation notes: optional shared developer-tool guidance.
 - `agent-evals/`: lightweight benchmark protocol; record only observed results, with unknowns

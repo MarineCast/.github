@@ -1,0 +1,96 @@
+{
+  "type": "FeatureCollection",
+  "name": "Invented reference boundaries; not real governance data",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "feature_id": "fixture.boundary.0",
+        "source_id": "fixture.alpha",
+        "fixture_h3": "8628d1047ffffff",
+        "effective_from": null,
+        "effective_to": null
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -123.08004574632294,
+              48.52400572596617
+            ],
+            [
+              -123.04519826675859,
+              48.54712403249015
+            ],
+            [
+              -123.05676115644071,
+              48.575725247602726
+            ],
+            [
+              -123.10319180868707,
+              48.581201207444096
+            ],
+            [
+              -123.1380252021903,
+              48.558077726070124
+            ],
+            [
+              -123.12644205321313,
+              48.52948346384153
+            ],
+            [
+              -123.08004574632294,
+              48.52400572596617
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "feature_id": "fixture.boundary.2",
+        "source_id": "fixture.alpha",
+        "fixture_h3": "8628d106fffffff",
+        "effective_from": null,
+        "effective_to": null
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -123.16124192776248,
+              48.50634206646982
+            ],
+            [
+              -123.12644205321313,
+              48.52948346384153
+            ],
+            [
+              -123.1380252021903,
+              48.558077726070124
+            ],
+            [
+              -123.1844284198367,
+              48.563523620384366
+            ],
+            [
+              -123.2192141062911,
+              48.54037707217293
+            ],
+            [
+              -123.20761078690172,
+              48.51178978459939
+            ],
+            [
+              -123.16124192776248,
+              48.50634206646982
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

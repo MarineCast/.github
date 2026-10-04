@@ -1,6 +1,11 @@
 # MarineCast data-product contract v0.1
 
 **Status: proposed; no toolkit adoption or OrcaCast integration is established by this spec.**
+Tyler approved the [application delivery defaults](application-delivery-profile.md) on 2026-10-04:
+wide Parquet, daily cell/valid-interval rows for dynamic variants or cell rows for static variants,
+one resolution per table, and a companion manifest. That approved target profile does not change
+this v0.1 schema, invalidate its broader native/legacy formats or establish toolkit conformance.
+
 This is a small interchange contract for species-neutral tabular products. It supplements the
 [infrastructure requirements](../INFRASTRUCTURE.md#data-integration-requirements); each toolkit
 continues to own its science, native schemas, validation and publication workflow.
@@ -11,6 +16,8 @@ missingness and provenance before joining products.
 
 ## Scope and files
 
+- [application-delivery-profile.md](application-delivery-profile.md): approved application-facing
+  target defaults, distinct version/release identities, pending decisions and conformance evidence.
 - [product-manifest.schema.json](product-manifest.schema.json): JSON Schema Draft 2020-12 for
   one manifest describing one complete table artifact.
 - [examples/](examples/): synthetic JSON manifests, small CSV tables and the exact configuration

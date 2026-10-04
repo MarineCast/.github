@@ -89,6 +89,13 @@ implemented ecosystem standard. Trial it independently in two or three toolkits 
 shared code; no `marinecast-core` package is introduced. Toolkit adoption and application
 integration require separate validation.
 
+Tyler approved the [application delivery defaults](contracts/application-delivery-profile.md) on
+2026-10-04: wide Parquet, daily cell/valid-interval rows for dynamic product variants or cell rows
+for static variants, one H3 resolution per table and a companion manifest. Preserve native cadence
+and necessary dimensions; every daily metric needs a justified aggregation or representation.
+Numerical resolution, day calendar/timezone and detailed scientific choices remain pending.
+This target decision does not change v0.1, invalidate native/legacy formats or establish adoption.
+
 | Contract | What producers and consumers must agree on |
 | --- | --- |
 | Identity and grain | What one row represents, durable keys, uniqueness, and join cardinality |

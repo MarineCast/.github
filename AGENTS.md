@@ -12,8 +12,9 @@ This `AGENTS.md` applies to this checkout; it does not automatically govern othe
 - `INFRASTRUCTURE.md`: current repository responsibilities, intended integration contracts, and
   operational boundaries for work across repositories.
 - `README.md`: entry point explaining this documentation repository.
-- `contracts/`: proposed data-product specifications, schemas and synthetic examples; distinguish
-  a validated example from toolkit adoption or application integration.
+- `contracts/`: proposed manifest specifications, schemas and synthetic examples, plus the
+  approved application delivery defaults; distinguish a target decision or validated example
+  from toolkit adoption or application integration.
 - `AGENTS.md`: instructions for maintaining these documents.
 - `docs/code-navigation.md` and evaluation notes: optional shared developer-tool guidance.
 - `agent-evals/`: lightweight benchmark protocol; record only observed results, with unknowns

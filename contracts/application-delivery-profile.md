@@ -14,6 +14,7 @@ Tyler approved the delivery shape with “Yes that is exactly what I mean. Let's
 | Static grain | One row per H3 cell for a specified product variant, with metric columns and a declared reference period/applicability. Do not fabricate a row-level date. |
 | Resolution | One H3 resolution per published table. Viewshed and related Human/viewability variables retain R7 under the approved exception below. Broader numerical policy and assignments remain pending; the exploratory direction is not approval of fixed R6 or R5/R4 assignments. |
 | Metric naming | Readable `lower_snake_case` names with quantity, statistic and unit where applicable; precise definitions remain in the manifest. Identifiers, status and categorical fields do not acquire invented physical units. |
+| Missingness and status | Missing values stay null, never become zero. Each metric has an accurate status distinguishing valid, unavailable, unknown, not applicable or partial; v0.1 encodes valid as `observed`. Partial estimates carry defined coverage. |
 | Companion manifest | Describe units, methods, source data, quality rules and versions, together with v0.1 identity, spatial/temporal support, missingness, provenance, rights, configuration, exact artifact checksums and limitations. |
 | Necessary dimensions | Preserve species, depth, source/target roles and other distinguishing dimensions in native companions or explicit, independently identifiable product variants, with auditable projections or reductions. |
 
@@ -41,7 +42,27 @@ Names and manifest definitions must identify the exact quantity. Air versus wate
 
 Keep v0.1's namespaced product identity and explicit variant identity for collision prevention. Consumers must qualify fields by their product/variant and reject ambiguous column collisions; a readable column name alone is not a global registry. Exact product names and any shared registry still require review. This documentation decision does not rename existing toolkit fields, migrate data or approve code changes; future mappings must be explicit and independently validated.
 
-Naming approval does not approve a new per-metric null/status mapping or QC enum. v0.1's `observed`, `unknown`, `unavailable`, `not_applicable` and `partial` meanings remain unchanged. In particular, no `observed`-to-`valid` renaming is inferred. Nulls remain distinct from observed zero under the existing contract; proposed new status/coverage conventions require separate review.
+## Approved missingness and coverage semantics
+
+Tyler approved the missingness proposal with “Yes this works”: missing values remain null rather than becoming zero; each metric has a status distinguishing valid, unavailable, unknown, not applicable or partial; zero represents a genuinely valid zero; partial estimates include coverage. These are approved semantic defaults, not evidence that existing producers already support them.
+
+For v0.1 manifests and artifacts, map the user-facing word **valid** to the existing enum code **`observed`**. This code already covers a valid measurement or derived result, including a true zero; it does not imply that a value is a raw observation. Retain source/method provenance and labels that distinguish measurements, estimates and derived quantities. Do not rename the v0.1 enum to `valid`, add a new `missing` code, or change schema version `0.1` by implication.
+
+| User-facing meaning | v0.1 code | Value rule |
+| --- | --- | --- |
+| Valid | `observed` | Non-null valid measurement or derived result; numeric values are finite. Zero is allowed only when valid for the defined quantity and support. |
+| Unavailable | `unavailable` | Null; expected source or result was unavailable. |
+| Unknown | `unknown` | Null; reason or state is unknown. |
+| Not applicable | `not_applicable` | Null; the quantity does not apply to the row. |
+| Partial | `partial` | Finite estimate or null from incomplete support, accompanied by explicit coverage meaning/evidence and a documented interpretation. |
+
+A missing value is null and must be classified by its actual reason; absence is not observed zero. Each metric needs a non-null status accurate for that metric on every row. A shared status column is permitted only when its state is correct for **every referencing metric on every row**. Otherwise use separate per-metric status columns; family-level availability cannot stand in for metric-level completeness.
+
+For nullable metrics, v0.1's declared `missing_reason_field` links to the status column with the existing exact enum. For non-nullable metrics, declare any profile-required status column and its relationship in existing field descriptions; v0.1 forbids `missing_reason_field` when `nullable` is false. Review the profile's semantic associations without inventing unknown core fields or relaxing strict validation.
+
+Partial coverage must describe what was available against what was expected: support interval/domain, numerator, denominator, units, weighting and calculation method, including the metric-specific gaps and effect on the estimate. Counts, duration, area or another justified measure may be appropriate; no universal percentage, minimum threshold or averaging rule is selected. A finite partial estimate must carry inspectable coverage for its declared support. Partial null outputs retain available coverage evidence and explicit gaps; unknown coverage is reported as unknown rather than fabricated. Coverage and quality fields are declared and preserved with their metric relationship in the manifest and consumer round-trip.
+
+This approval does not implement statuses/coverage, certify a producer, or approve toolkit migration. Product-specific coverage methods, acceptance thresholds and scientific eligibility remain reviewed decisions. The v0.1 schema, `observed` semantics and existing fixtures remain unchanged.
 
 ## Relationship to manifest contract v0.1
 
@@ -76,12 +97,12 @@ Each published table still declares one resolution. Cross-resolution use require
 
 ## Decisions still pending
 
-Approval selects the delivery shape, daily dynamic cadence, UTC calendar boundaries/labels, readable metric naming pattern and scoped R7 exception. Product review must still decide:
+Approval selects the delivery shape, daily dynamic cadence, UTC calendar boundaries/labels, readable metric naming pattern, missingness/status semantics with partial coverage and scoped R7 exception. Product review must still decide:
 
 - Interval aggregation/representation, weighting, completeness and partial-period rules; any explicitly labeled local-day exception requires a reviewed aggregation/profile. The default UTC calendar and boundaries are approved.
 - Broader numerical H3 resolution policy and product assignments beyond the approved R7 exception, geographic domain and spatial support/assignment or conversion methods. No fixed R6 or R5/R4 assignments are approved.
 - Exact per-product metric names, any common registry and explicit field mappings/migrations; the readable quantity/statistic/unit naming pattern is approved, with full manifest definitions.
-- QC implementation, new per-metric status/coverage conventions or code changes; existing v0.1 missing-reason semantics and `observed` meaning remain in force.
+- Product-specific coverage calculations, QC implementation and code changes; semantic status defaults are approved through the unchanged v0.1 codes, including `observed` for valid values.
 - Forecast profiles, issue/lead-time and ensemble handling; this approval does not approve a forecast profile.
 - Scientific thresholds, source qualification, rights, release audience and product eligibility.
 
@@ -95,6 +116,6 @@ Evaluate native spatial support/detail, scientifically important gradients retai
 
 ## Conformance and tracking
 
-Record adoption separately for each named product/variant, with its code SHA, native-to-profile mapping, daily interpretation where dynamic, method version, software version, generated-data release identity, sources/configuration, manifest/artifact hashes, validation commands/results and reviewer decision. Verify key uniqueness, dimension preservation, units/support, null-versus-zero behavior, publication/recovery and a consumer round-trip without row expansion, silent resampling or future-data leakage. Scientific qualification remains a separate gate for the claimed use.
+Record adoption separately for each named product/variant, with its code SHA, native-to-profile mapping, daily interpretation where dynamic, method version, software version, generated-data release identity, sources/configuration, manifest/artifact hashes, validation commands/results and reviewer decision. Verify key uniqueness, dimension preservation, units/support, per-metric value/status consistency, partial-coverage meaning, null-versus-zero behavior, publication/recovery and a consumer round-trip without row expansion, silent resampling or future-data leakage. Scientific qualification remains a separate gate for the claimed use.
 
 The [production readiness hub](../docs/production-readiness/README.md) retains the original dated assessment and drafts. Approval of these defaults is not evidence that any toolkit already conforms; no adoption status is changed by this documentation decision.

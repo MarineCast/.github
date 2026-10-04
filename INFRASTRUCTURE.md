@@ -104,6 +104,10 @@ balancing native support, retained gradients and memory/storage costs; no R6/R5/
 Readable `lower_snake_case` metric names include quantity/statistic/unit where applicable, backed
 by precise manifest definitions and namespaced product identity. This does not rename existing
 fields or approve a new QC/status enum.
+Missingness semantics are approved: null never defaults to zero, statuses are accurate per metric,
+valid maps to existing v0.1 `observed` (including derived results), and partial estimates carry
+coverage with a declared denominator/method. Shared status is allowed only when correct for
+every referencing metric on every row; coverage thresholds and implementation remain product-specific.
 This target decision does not change v0.1, invalidate native/legacy formats or establish adoption.
 
 | Contract | What producers and consumers must agree on |

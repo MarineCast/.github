@@ -11,6 +11,10 @@ inclusive to next midnight exclusive, with aware UTC timestamps and interval-sta
 Reviewed local-day exceptions must be explicit; native v0.1 timezone options remain unchanged.
 Readable `lower_snake_case` metric naming with quantity/statistic/unit where applicable and full
 manifest definitions is approved; existing fields and v0.1 status enums are not renamed.
+Missingness/status semantics are approved: missing values remain null, each metric has accurate
+status, valid maps to existing `observed` (including valid derived values), and partial estimates
+carry defined coverage. Shared statuses must be correct for all referencing metrics on every row.
+No universal coverage threshold or new enum is introduced; schema v0.1 remains unchanged.
 
 This is a small interchange contract for species-neutral tabular products. It supplements the
 [infrastructure requirements](../INFRASTRUCTURE.md#data-integration-requirements); each toolkit

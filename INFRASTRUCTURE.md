@@ -89,6 +89,27 @@ implemented ecosystem standard. Trial it independently in two or three toolkits 
 shared code; no `marinecast-core` package is introduced. Toolkit adoption and application
 integration require separate validation.
 
+Tyler approved the [application delivery defaults](contracts/application-delivery-profile.md) on
+2026-10-04: wide Parquet, daily UTC cell/valid-interval rows for dynamic product variants or cell rows
+for static variants, one H3 resolution per table and a companion manifest. Preserve native cadence
+and necessary dimensions; every daily metric needs a justified aggregation or representation.
+Viewshed and related Human/viewability variables retain R7 as an approved exception, without
+reassigning all Human products. Cross-resolution use needs an explicit validated adapter.
+UTC daily intervals run midnight inclusive to next midnight exclusive, with aware UTC timestamps
+and interval-start UTC date labels. Local-day exceptions need a reviewed aggregation/profile and
+explicit support; never silently relabel them UTC. Broader numerical resolution and detailed
+scientific aggregation choices remain pending.
+The profile records an exploratory R6 starting point with justified per-product R5/R4 possibilities,
+balancing native support, retained gradients and memory/storage costs; no R6/R5/R4 assignments are approved.
+Readable `lower_snake_case` metric names include quantity/statistic/unit where applicable, backed
+by precise manifest definitions and namespaced product identity. This does not rename existing
+fields or approve a new QC/status enum.
+Missingness semantics are approved: null never defaults to zero, statuses are accurate per metric,
+valid maps to existing v0.1 `observed` (including derived results), and partial estimates carry
+coverage with a declared denominator/method. Shared status is allowed only when correct for
+every referencing metric on every row; coverage thresholds and implementation remain product-specific.
+This target decision does not change v0.1, invalidate native/legacy formats or establish adoption.
+
 | Contract | What producers and consumers must agree on |
 | --- | --- |
 | Identity and grain | What one row represents, durable keys, uniqueness, and join cardinality |

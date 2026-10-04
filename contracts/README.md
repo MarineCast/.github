@@ -1,6 +1,21 @@
 # MarineCast data-product contract v0.1
 
 **Status: proposed; no toolkit adoption or OrcaCast integration is established by this spec.**
+Tyler approved the [application delivery defaults](application-delivery-profile.md) on 2026-10-04:
+wide Parquet, daily UTC cell/valid-interval rows for dynamic variants or cell rows for static variants,
+one resolution per table, and a companion manifest. That approved target profile does not change
+this v0.1 schema, invalidate its broader native/legacy formats or establish toolkit conformance.
+Viewshed and related Human/viewability variables retain R7 under a scoped approved exception;
+the broader numerical resolution policy remains exploratory. Daily UTC intervals run midnight
+inclusive to next midnight exclusive, with aware UTC timestamps and interval-start date labels.
+Reviewed local-day exceptions must be explicit; native v0.1 timezone options remain unchanged.
+Readable `lower_snake_case` metric naming with quantity/statistic/unit where applicable and full
+manifest definitions is approved; existing fields and v0.1 status enums are not renamed.
+Missingness/status semantics are approved: missing values remain null, each metric has accurate
+status, valid maps to existing `observed` (including valid derived values), and partial estimates
+carry defined coverage. Shared statuses must be correct for all referencing metrics on every row.
+No universal coverage threshold or new enum is introduced; schema v0.1 remains unchanged.
+
 This is a small interchange contract for species-neutral tabular products. It supplements the
 [infrastructure requirements](../INFRASTRUCTURE.md#data-integration-requirements); each toolkit
 continues to own its science, native schemas, validation and publication workflow.
@@ -11,6 +26,8 @@ missingness and provenance before joining products.
 
 ## Scope and files
 
+- [application-delivery-profile.md](application-delivery-profile.md): approved application-facing
+  target defaults, distinct version/release identities, pending decisions and conformance evidence.
 - [product-manifest.schema.json](product-manifest.schema.json): JSON Schema Draft 2020-12 for
   one manifest describing one complete table artifact.
 - [examples/](examples/): synthetic JSON manifests, small CSV tables and the exact configuration

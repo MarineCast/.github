@@ -9,6 +9,8 @@ Viewshed and related Human/viewability variables retain R7 under a scoped approv
 the broader numerical resolution policy remains exploratory. Daily UTC intervals run midnight
 inclusive to next midnight exclusive, with aware UTC timestamps and interval-start date labels.
 Reviewed local-day exceptions must be explicit; native v0.1 timezone options remain unchanged.
+Readable `lower_snake_case` metric naming with quantity/statistic/unit where applicable and full
+manifest definitions is approved; existing fields and v0.1 status enums are not renamed.
 
 This is a small interchange contract for species-neutral tabular products. It supplements the
 [infrastructure requirements](../INFRASTRUCTURE.md#data-integration-requirements); each toolkit

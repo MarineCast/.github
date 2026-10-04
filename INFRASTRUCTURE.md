@@ -101,6 +101,9 @@ explicit support; never silently relabel them UTC. Broader numerical resolution 
 scientific aggregation choices remain pending.
 The profile records an exploratory R6 starting point with justified per-product R5/R4 possibilities,
 balancing native support, retained gradients and memory/storage costs; no R6/R5/R4 assignments are approved.
+Readable `lower_snake_case` metric names include quantity/statistic/unit where applicable, backed
+by precise manifest definitions and namespaced product identity. This does not rename existing
+fields or approve a new QC/status enum.
 This target decision does not change v0.1, invalidate native/legacy formats or establish adoption.
 
 | Contract | What producers and consumers must agree on |

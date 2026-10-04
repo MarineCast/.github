@@ -13,6 +13,7 @@ Tyler approved the delivery shape with “Yes that is exactly what I mean. Let's
 | Daily calendar and label | UTC midnight inclusive to the next UTC midnight exclusive, using timezone-aware UTC boundary timestamps. The daily date label is the UTC interval-start date; it does not replace the boundaries. |
 | Static grain | One row per H3 cell for a specified product variant, with metric columns and a declared reference period/applicability. Do not fabricate a row-level date. |
 | Resolution | One H3 resolution per published table. Viewshed and related Human/viewability variables retain R7 under the approved exception below. Broader numerical policy and assignments remain pending; the exploratory direction is not approval of fixed R6 or R5/R4 assignments. |
+| Metric naming | Readable `lower_snake_case` names with quantity, statistic and unit where applicable; precise definitions remain in the manifest. Identifiers, status and categorical fields do not acquire invented physical units. |
 | Companion manifest | Describe units, methods, source data, quality rules and versions, together with v0.1 identity, spatial/temporal support, missingness, provenance, rights, configuration, exact artifact checksums and limitations. |
 | Necessary dimensions | Preserve species, depth, source/target roles and other distinguishing dimensions in native companions or explicit, independently identifiable product variants, with auditable projections or reductions. |
 
@@ -31,6 +32,16 @@ UTC calendar days are approved: each daily interval is **[00:00 UTC, next 00:00 
 Explicitly labeled local-day exceptions require a reviewed aggregation/profile and declared calendar zone, boundaries and label meaning. Local days can be 23 or 25 hours; do not silently relabel them as UTC days or merely change their date labels. Mapping native local-day support to the UTC target requires a justified transformation; preserve the original support and report unavailable output where the evidence cannot support the conversion. Existing v0.1 local-day/native products remain valid under their contracts but do not automatically conform to the UTC default.
 
 The UTC decision does not approve an aggregation method or global completeness threshold. Metrics in one row must have compatible declared daily support; incompatible support requires separate products or a reviewed transformation. Slower native applicability remains documented even when a justified daily representation is provided.
+
+## Metric naming and definitions
+
+Tyler approved readable quantity/statistic/unit naming, illustrated by `temperature_mean_c`, `wind_speed_mean_m_s` and `depth_mean_m`, with full definitions in the manifest. Use readable `lower_snake_case` names; include statistic and unit components where they actually apply. Identifiers, status and categorical fields must not invent physical units or numerical statistics to fit the pattern.
+
+Names and manifest definitions must identify the exact quantity. Air versus water temperature, measurement height, depth sign/vertical datum, statistic, support and unit cannot remain ambiguous. For example, use an air/water qualifier where needed instead of placing indistinguishable `temperature_mean_c` quantities in one consumer namespace; the manifest retains the precise scientific definition and method. A unit suffix does not authorize conversion or establish what a measurement means.
+
+Keep v0.1's namespaced product identity and explicit variant identity for collision prevention. Consumers must qualify fields by their product/variant and reject ambiguous column collisions; a readable column name alone is not a global registry. Exact product names and any shared registry still require review. This documentation decision does not rename existing toolkit fields, migrate data or approve code changes; future mappings must be explicit and independently validated.
+
+Naming approval does not approve a new per-metric null/status mapping or QC enum. v0.1's `observed`, `unknown`, `unavailable`, `not_applicable` and `partial` meanings remain unchanged. In particular, no `observed`-to-`valid` renaming is inferred. Nulls remain distinct from observed zero under the existing contract; proposed new status/coverage conventions require separate review.
 
 ## Relationship to manifest contract v0.1
 
@@ -65,12 +76,12 @@ Each published table still declares one resolution. Cross-resolution use require
 
 ## Decisions still pending
 
-Approval selects the delivery shape, daily dynamic cadence, UTC calendar boundaries/labels and scoped R7 exception. Product review must still decide:
+Approval selects the delivery shape, daily dynamic cadence, UTC calendar boundaries/labels, readable metric naming pattern and scoped R7 exception. Product review must still decide:
 
 - Interval aggregation/representation, weighting, completeness and partial-period rules; any explicitly labeled local-day exception requires a reviewed aggregation/profile. The default UTC calendar and boundaries are approved.
 - Broader numerical H3 resolution policy and product assignments beyond the approved R7 exception, geographic domain and spatial support/assignment or conversion methods. No fixed R6 or R5/R4 assignments are approved.
-- Global metric naming or a common registry; individual metrics still need unambiguous qualified definitions.
-- QC implementation or code changes; existing v0.1 missing-reason semantics remain in force.
+- Exact per-product metric names, any common registry and explicit field mappings/migrations; the readable quantity/statistic/unit naming pattern is approved, with full manifest definitions.
+- QC implementation, new per-metric status/coverage conventions or code changes; existing v0.1 missing-reason semantics and `observed` meaning remain in force.
 - Forecast profiles, issue/lead-time and ensemble handling; this approval does not approve a forecast profile.
 - Scientific thresholds, source qualification, rights, release audience and product eligibility.
 

@@ -11,7 +11,7 @@ Tyler approved the delivery shape with “Yes that is exactly what I mean. Let's
 | Physical format | Wide Parquet: qualified metrics are columns, alongside identity, support and quality fields needed to interpret them. |
 | Dynamic grain and cadence | Daily application-facing output for every dynamic variable: one row per H3 cell and declared daily valid interval for a specified product variant. Each metric has a documented, scientifically valid daily aggregation or representation. |
 | Static grain | One row per H3 cell for a specified product variant, with metric columns and a declared reference period/applicability. Do not fabricate a row-level date. |
-| Resolution | One H3 resolution per published table. The numerical resolution remains pending; this decision does not select R6 or any other value. |
+| Resolution | One H3 resolution per published table. Viewshed and related Human/viewability variables retain R7 under the approved exception below. Broader numerical policy and assignments remain pending; the exploratory direction is not approval of fixed R6 or R5/R4 assignments. |
 | Companion manifest | Describe units, methods, source data, quality rules and versions, together with v0.1 identity, spatial/temporal support, missingness, provenance, rights, configuration, exact artifact checksums and limitations. |
 | Necessary dimensions | Preserve species, depth, source/target roles and other distinguishing dimensions in native companions or explicit, independently identifiable product variants, with auditable projections or reductions. |
 
@@ -52,18 +52,30 @@ The companion manifest and pinned, recoverable references must distinguish these
 
 v0.1 provides product/producer versions, code revision, processing/source/configuration provenance and artifact SHA-256. It has no dedicated core `scientific_method_version` or `data_release_id` fields. Record those identities explicitly through semantically appropriate existing descriptive fields or pinned method/release references, and verify recoverability during conformance review. The current schema does not enforce their contents. Dedicated machine-validated fields require a reviewed schema revision; do not add undeclared core fields or repurpose a software version or artifact hash as a method version or release ID.
 
+## Approved R7 exception
+
+Tyler approved: “viewshed can stay at res 7 (and the related human variables).” Viewshed and related Human/viewability variables therefore retain R7. This is a specific approved resolution exception, not a decision that all Human products move to R7; AIS and unrelated Human products are not reassigned by it. The exact mapping of named Human products to this viewability-related scope must be documented in their conformance records without widening the approval.
+
+Each published table still declares one resolution. Cross-resolution use requires an explicit adapter and reviewed support/reduction rules, with validation of keys, row counts, units, nulls and scientific meaning. Do not silently join R7 with coarser cells, copy coarse values into R7/R6 as if they gained detail, or claim that a cross-resolution adapter is already implemented. This exception does not change the approved daily application cadence for dynamic variables or the static grain for static variables.
+
 ## Decisions still pending
 
-Approval selects the delivery shape and daily dynamic cadence. Product review must still decide:
+Approval selects the delivery shape, daily dynamic cadence and scoped R7 exception. Product review must still decide:
 
 - Calendar timezone and UTC-versus-local day boundaries; interval aggregation/representation, weighting, completeness and partial-period rules.
-- Numerical H3 resolution, geographic domain and spatial support/assignment or conversion methods. R6 has not been approved.
+- Broader numerical H3 resolution policy and product assignments beyond the approved R7 exception, geographic domain and spatial support/assignment or conversion methods. No fixed R6 or R5/R4 assignments are approved.
 - Global metric naming or a common registry; individual metrics still need unambiguous qualified definitions.
 - QC implementation or code changes; existing v0.1 missing-reason semantics remain in force.
 - Forecast profiles, issue/lead-time and ensemble handling; this approval does not approve a forecast profile.
 - Scientific thresholds, source qualification, rights, release audience and product eligibility.
 
 The decision does not select a first producer, source, delivery date or implementation sequence. It does not turn a feature join into evidence of actual model covariate use or predictive validity.
+
+## Exploratory resolution direction
+
+Tyler described this discussion as “just thinking out loud here”: R6 is the usual starting point under consideration, with scientifically justified per-product R5 or R4 exceptions where appropriate. Weather, oceanography and other time-varying products with many metrics are candidates for that tradeoff, not assigned resolutions. Broader policy and R6/R5/R4 product choices remain pending, beyond the separately approved R7 exception.
+
+Evaluate native spatial support/detail, scientifically important gradients retained or lost, and expected cell counts, daily row counts, metric width, memory and storage costs. Coarser resolution needs a defensible product-specific method; cost alone does not establish scientific adequacy. Each published table still declares one resolution. Consumers require an explicit mapping that preserves support and meaning; do not force R6 replication of coarse values or treat it as added detail. Any conversion or join remains subject to the existing compatibility and acceptance checks.
 
 ## Conformance and tracking
 

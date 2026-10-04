@@ -93,7 +93,11 @@ Tyler approved the [application delivery defaults](contracts/application-deliver
 2026-10-04: wide Parquet, daily cell/valid-interval rows for dynamic product variants or cell rows
 for static variants, one H3 resolution per table and a companion manifest. Preserve native cadence
 and necessary dimensions; every daily metric needs a justified aggregation or representation.
-Numerical resolution, day calendar/timezone and detailed scientific choices remain pending.
+Viewshed and related Human/viewability variables retain R7 as an approved exception, without
+reassigning all Human products. Cross-resolution use needs an explicit validated adapter.
+Broader numerical resolution, day calendar/timezone and detailed scientific choices remain pending.
+The profile records an exploratory R6 starting point with justified per-product R5/R4 possibilities,
+balancing native support, retained gradients and memory/storage costs; no R6/R5/R4 assignments are approved.
 This target decision does not change v0.1, invalidate native/legacy formats or establish adoption.
 
 | Contract | What producers and consumers must agree on |

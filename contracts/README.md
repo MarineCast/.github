@@ -5,6 +5,8 @@ Tyler approved the [application delivery defaults](application-delivery-profile.
 wide Parquet, daily cell/valid-interval rows for dynamic variants or cell rows for static variants,
 one resolution per table, and a companion manifest. That approved target profile does not change
 this v0.1 schema, invalidate its broader native/legacy formats or establish toolkit conformance.
+Viewshed and related Human/viewability variables retain R7 under a scoped approved exception;
+the broader numerical resolution policy remains exploratory.
 
 This is a small interchange contract for species-neutral tabular products. It supplements the
 [infrastructure requirements](../INFRASTRUCTURE.md#data-integration-requirements); each toolkit

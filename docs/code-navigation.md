@@ -7,8 +7,8 @@ contracts remain in [INFRASTRUCTURE.md](../INFRASTRUCTURE.md).
 
 | Need | First tool | Retrieve next |
 | --- | --- | --- |
-| Known symbol, callers, imports, dependencies, blast radius | Graphify `explain`, then relationship-filtered traversal | Identified symbol bodies and relevant tests |
-| Unknown owner/module within one checkout | Narrow Graphify `query` | Matching symbols, not entire neighborhoods |
+| Known symbol, callers, imports, dependencies, blast radius | Scoped source search, or existing fresh Graphify `explain` when relationships need exploration | Identified symbol bodies and relevant tests |
+| Unknown owner/module within one checkout | Static ownership map, then scoped search or narrow existing-graph `query` | Matching symbols, not entire neighborhoods |
 | Repeated syntax, call shapes, codemod candidates | ast-grep CLI | Matches within candidate directories |
 | Literal config key, string, filename or prose | `rg -n -F` / `rg --files` | Matching lines plus necessary context |
 | Semantic references or symbol editing in pilot | Optional Serena, viewshed only | Relevant references/body; verify against source/tests |
@@ -19,7 +19,14 @@ contracts remain intact; selective loading, rather than deletion, is the optimiz
 
 ## Graphify: verified local CLI, 2026-09-15
 
-Run inside the owning toolkit, using its existing graph:
+Identify the installed CLI/version and owning toolkit first. Before using an existing graph,
+check its manifest against task-relevant source paths and changes. Missing/new paths or changed
+content require source fallback; matching mtimes alone do not prove freshness. Record revision,
+dirty state, extraction mode/version and exclusions when available. Graph/report/HTML sidecars
+may have different dates; use only evidence current for the task. A routing availability flag is
+not a freshness guarantee. Do not rebuild merely to answer a question.
+
+Run inside the owning toolkit, using its existing graph when coverage is adequate:
 
 ```sh
 graphify explain "normalize_tides"
@@ -41,9 +48,19 @@ requested budget; the budget is not a reliable hard limit.
 
 Install Graphify only in an isolated developer environment (`graphifyy==0.9.62`), separate from
 runtime dependencies. A shell can invoke its absolute executable without activating that environment.
-The local workspace AGENTS records the existing machine-specific installation. For fresh clones or
-structural changes, use `graphify extract . --code-only --no-cluster` inside that repository.
+The local workspace AGENTS records the existing machine-specific installation. Only for an explicitly requested build/refresh after
+structural changes settle, use `graphify extract . --code-only --no-cluster` inside that repository.
 Never run it at the workspace/grouping root. Never commit caches or enable installation hooks implicitly.
+A question/build request does not implicitly authorize installation or upgrade. The global skill's
+navigation entry point should load only existing-index guidance; semantic extraction and export
+recipes belong behind explicit requests. Keep AST-only omissions and dynamic-reference limits
+visible and verify source/tests, especially after no-match results.
+
+This CLI can write query logs and cache stamps during query/explain/path. For a strictly read-only
+audit inspect JSON directly, or use an isolated copy when within scope. Do not save feedback,
+reflect or change learning overlays implicitly. Graph size/extraction counters are not task token
+telemetry; collect actual time/read/token evidence using [agent evaluations](../agent-evals/README.md)
+before claiming savings.
 
 ## Syntax-aware search: optional ast-grep CLI
 

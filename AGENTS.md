@@ -29,7 +29,12 @@ This `AGENTS.md` applies to this checkout; it does not automatically govern othe
   evidence that a data pipeline, deployment, or public release works.
 - Keep the public profile concise. Put detailed cross-repository contracts in `INFRASTRUCTURE.md`
   and implementation commands in the owning toolkit's documentation.
-- `toolkit-human` now owns extracted human producers and legacy observation geometry. Do not
+- `toolkit-human` is data-only for human layers and source-supported effects, including
+  acquisition, processing, documented data derivations and export. Ecological response
+  fitting, prediction and observation/reporting assumptions belong to modeling.
+  It retains legacy observation-geometry/proxy
+  imports for compatibility. Weather/viewability-weighted reporting-opportunity combinations
+  belong to modeling and are excluded from active Human products. Do not
   call it a scaffold or imply equivalence with `toolkit-viewshed`; follow its migration/validation
   docs. Its Graphify cache is local-only, like other implemented toolkits.
 - Preserve toolkit-specific scientific contracts. Do not present a proposed shared schema as an

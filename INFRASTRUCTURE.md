@@ -27,7 +27,7 @@ the toolkit migration document records validation scope separately from producti
 | [toolkit-oceanography](https://github.com/MarineCast/toolkit-oceanography) | Ocean properties, currents, tides, and waves | Incomplete `oceanography` research package, CLI, offline tests and prioritized TODO; seascape inputs and further validation required |
 | [toolkit-meteorology](https://github.com/MarineCast/toolkit-meteorology) | HRRR weather, daylight, lunar and atmospheric H3 products | Installable `meteorology` package, CLI and offline tests; application integration deferred |
 | [toolkit-ais](https://github.com/MarineCast/toolkit-ais) | Vessel tracks and maritime activity | Initial repository; README only before agent guidance |
-| [toolkit-human](https://github.com/MarineCast/toolkit-human) | Population, access, recreation, and human activity | Installable `human` research package extracted from OrcaCast; CLI, offline tests and local Graphify navigation; regional/application integration unverified |
+| [toolkit-human](https://github.com/MarineCast/toolkit-human) | Data layers for human presence, activity, access and source-supported effects | Installable `human` research package extracted from OrcaCast; population, access, calendar and AIS/ferry producers; broader effects layers planned; regional/application integration unverified |
 | `toolkit-acoustic` (planned) | Acoustic observations and marine soundscape products | Planned repository; no current local checkout or GitHub repository was found on 2026-09-19 |
 | [toolkit-salmon](https://github.com/MarineCast/toolkit-salmon) | Salmon data and future prey-context products | Initial README-only repository; no implemented package or pipeline |
 | [toolkit-governance](https://github.com/MarineCast/toolkit-governance) | Native-geometry marine protected areas, jurisdictional references and fisheries management | Installable `governance` package, CLI, six implemented collections, offline tests and local Graphify graph; 18 catalog entries remain planned |
@@ -172,9 +172,19 @@ an adopter implements and validates v0.2; no toolkit or existing data release is
 - `toolkit-oceanography` contains extracted research producers and offline tests. Its root `TODO.txt`
   tracks incomplete research and production hardening; regional execution requires externally
   provisioned seascape products. Package installation does not establish a complete ocean pipeline.
-- `toolkit-human` owns extracted population, access, calendar, AIS/ferry and reporting-opportunity
-  producers. Its legacy observation geometry remains separate from `toolkit-viewshed`; equivalence
-  is not established. `toolkit-ais` remains a scaffold. See the human README for setup and limits.
+- `toolkit-human` is a data-only toolkit for human layers and effects, owning acquisition,
+  processing, documented data derivations and export. Current active producers cover
+  population, access, calendar and native AIS/ferry activity. Broader source-supported
+  pressure, exposure and effects layers require their own implementation and validation;
+  ecological response fitting and prediction belong to modeling.
+  As of 2026-10-15, combinations with weather, physical viewability and reporting assumptions
+  belong to modeling. Land/water/AIS reporting-opportunity proxies are excluded from its active
+  CLI families, workspace defaults, feature catalog and study exports; legacy imports, templates
+  and artifacts remain for existing research. Atmospheric visibility does not gate completion of
+  Human source acquisition. Its legacy observation geometry remains separate from
+  `toolkit-viewshed`; equivalence is not established. `toolkit-ais` remains a scaffold. See the
+  [Human product scope](https://github.com/MarineCast/toolkit-human/blob/HEAD/docs/product-scope.md)
+  for the boundary; no replacement modeling implementation or model promotion is implied.
 - `toolkit-governance` contains the extracted native-geometry producers, configuration, catalog and
   tests. Its README and workflow docs describe explicit workspaces and per-file atomic outputs;
   there is no whole-family transaction. Historical local products were preserved as migration
@@ -194,6 +204,31 @@ an adopter implements and validates v0.2; no toolkit or existing data release is
   a documented process in the owning repository.
 - Code publishing and dataset redistribution are separate actions. Check applicable source rights
   before placing example data or generated products in a public repository.
+
+### Final-product storage decision — 2026-10-18
+
+The user approved keeping the Data delivery tree for final products and their required
+catalogs/lineage, plus the user-maintained `Data/REVIEW_TODO.txt` checklist.
+The user explicitly confirmed the checklist stays in Data. Acquisition caches, transaction state and computation scratch
+belong outside that tree. Successful normal runs discard their owned downloaded
+payloads, intermediate arrays and obsolete generations only after final readback.
+Failed/deferred runs may retain bounded resumable work outside delivery. Compact
+provenance, source hashes, normalized observations and validation evidence survive;
+removing source payloads means a later rebuild can require reacquisition and may see
+a different provider vintage. This does not claim exact historical reconstruction.
+
+Human population source inputs and repository-owned orca source data are explicit
+retention exceptions and must be preserved. External input files and another active
+workflow's work are not cleanup targets. Stable advisory-lock inodes may remain in
+small control namespaces outside Data; do not unlink live locks during routine runs.
+
+Current scoped adoption: Hydrology canonical per-river publication uses a regular
+`Data/Hydrology` directory with recoverable directory promotion and no retained
+successful snapshots; Meteorology's supported `get_weather` removes owned source
+payloads after validation; Seascape's flat publisher keeps transaction state outside
+Data and its existing default successful-build scratch cleanup remains in force.
+Their owner API/contracts describe the precise lifecycle and failed-run limits.
+Legacy release APIs and other toolkits were not silently migrated by this change.
 
 ## Cross-repository change workflow
 
